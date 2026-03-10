@@ -1,27 +1,106 @@
-// Mostrar/esconder botão voltar ao topo
-const backToTop = document.querySelector('.back-to-top');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 400) {
-    backToTop.hidden = false;
-  } else {
-    backToTop.hidden = true;
+function trackEvent(eventName, params = {}) {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
   }
+}
+
+function applyRegionalPricing(countryCode) {
+  const isBrazil = countryCode === "BR";
+
+  document.querySelectorAll("[data-price-brl][data-price-usd]").forEach((node) => {
+    node.textContent = isBrazil ? node.getAttribute("data-price-brl") : node.getAttribute("data-price-usd");
+  });
+
+  document.querySelectorAll("[data-rate-brl][data-rate-usd]").forEach((node) => {
+    node.textContent = isBrazil ? node.getAttribute("data-rate-brl") : node.getAttribute("data-rate-usd");
+  });
+}
+
+async function detectVisitorCountry() {
+  try {
+    const response = await fetch("/cdn-cgi/trace", { cache: "no-store" });
+    if (response.ok) {
+      const trace = await response.text();
+      const match = trace.match(/^loc=([A-Z]{2})$/m);
+      if (match) return match[1];
+    }
+  } catch (error) {
+    // Ignore network errors and fallback to browser heuristics.
+  }
+
+  const browserLang = (navigator.language || "").toLowerCase();
+  const timezone = (Intl.DateTimeFormat().resolvedOptions().timeZone || "").toLowerCase();
+
+  if (browserLang.includes("-br") || timezone.includes("america/sao_paulo")) {
+    return "BR";
+  }
+
+  return "INTL";
+}
+
+detectVisitorCountry().then((countryCode) => {
+  applyRegionalPricing(countryCode);
 });
 
-backToTop.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+const isEnglish = document.documentElement.lang.toLowerCase().startsWith("en");
+
+document.querySelectorAll(".language-switch__link[data-lang]").forEach((link) => {
+  link.addEventListener("click", () => {
+    try {
+      localStorage.setItem("preferred_lang", link.getAttribute("data-lang"));
+    } catch (error) {
+      // Ignore storage errors and keep navigation flow.
+    }
   });
 });
+
+function pickCopy(copy) {
+  if (typeof copy === "string") return copy;
+  return isEnglish ? copy.en : copy.pt;
+}
+
+// Mostrar/esconder botao voltar ao topo
+const backToTop = document.querySelector(".back-to-top");
+
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.hidden = window.scrollY <= 400;
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+    trackEvent("back_to_top_click");
+  });
+}
 const projects = [
   {
-    title: "Glow Estética",
-    description:
-      "Landing page de um studio especializado em alongamento de unhas e cílios, com foco em atrair novas clientes, destacar serviços e facilitar o agendamento online.",
+    title: {
+      pt: "Glow Estética",
+      en: "Glow Beauty Studio"
+    },
+    description: {
+      pt: "Landing page de um estúdio especializado em alongamento de unhas e cílios, com foco em atrair novas clientes, destacar serviços e facilitar o agendamento online.",
+      en: "Landing page for a beauty studio specialized in nail and lash extensions, focused on attracting new clients, showcasing services, and simplifying online booking."
+    },
     image: "assets/glow-preview.png",
     url: "https://lashdesing.netlify.app/",
+    caseStudy: {
+      goal: {
+        pt: "Atrair novos agendamentos de serviços de beleza",
+        en: "Attract new beauty service bookings"
+      },
+      solution: {
+        pt: "Estrutura com oferta clara, prova social e CTA para WhatsApp",
+        en: "Structure with clear offer, social proof, and WhatsApp CTA"
+      },
+      result: {
+        pt: "Página mais objetiva para divulgação local e campanhas",
+        en: "A clearer page for local promotion and paid campaigns"
+      }
+    },
     theme: {
       accent: "#6ff0ff",
       surface: "rgba(14, 22, 54, 0.9)",
@@ -53,6 +132,9 @@ function createCard(project) {
   const image = cardNode.querySelector(".card__preview");
   const title = cardNode.querySelector(".card__title");
   const description = cardNode.querySelector(".card__description");
+  const goal = cardNode.querySelector(".card__goal");
+  const solution = cardNode.querySelector(".card__solution");
+  const result = cardNode.querySelector(".card__result");
 
   if (project.theme) {
     card.style.setProperty("--project-accent", project.theme.accent);
@@ -61,13 +143,25 @@ function createCard(project) {
   }
 
   link.href = project.url;
-  link.setAttribute("aria-label", `Abrir projeto ${project.title}`);
+  const titleText = pickCopy(project.title);
+  const descriptionText = pickCopy(project.description);
 
-  title.textContent = project.title;
-  description.textContent = project.description;
+  link.setAttribute(
+    "aria-label",
+    isEnglish ? `Open project ${titleText}` : `Abrir projeto ${titleText}`
+  );
+
+  title.textContent = titleText;
+  description.textContent = descriptionText;
+
+  if (project.caseStudy) {
+    goal.textContent = pickCopy(project.caseStudy.goal);
+    solution.textContent = pickCopy(project.caseStudy.solution);
+    result.textContent = pickCopy(project.caseStudy.result);
+  }
 
   image.src = project.image;
-  image.alt = `Preview do projeto ${project.title}`;
+  image.alt = isEnglish ? `Project preview ${titleText}` : `Preview do projeto ${titleText}`;
 
   return cardNode;
 }
@@ -86,40 +180,84 @@ if (quoteForm) {
     const niche = quoteForm.niche.value.trim();
     const goal = quoteForm.goal.value.trim();
 
-    // Validação básica
+    // Validacao basica
     if (!name || !niche || !goal) {
-      alert('Por favor, preencha todos os campos');
+      alert(isEnglish ? "Please fill in all fields" : "Por favor, preencha todos os campos");
       return;
     }
 
     if (name.length < 2) {
-      alert('Nome deve ter pelo menos 2 caracteres');
+      alert(
+        isEnglish
+          ? "Name must contain at least 2 characters"
+          : "Nome deve ter pelo menos 2 caracteres"
+      );
       return;
     }
 
     const button = quoteForm.querySelector("button[type='submit']");
     const originalText = button.textContent;
-    button.textContent = "Enviando...";
+    button.textContent = isEnglish ? "Sending..." : "Enviando...";
     button.disabled = true;
 
-    // Sanitização básica
-    const sanitizedName = name.replace(/[<>]/g, '');
-    const sanitizedNiche = niche.replace(/[<>]/g, '');
-    const sanitizedGoal = goal.replace(/[<>]/g, '');
+    // Sanitizacao basica
+    const sanitizedName = name.replace(/[<>]/g, "");
+    const sanitizedNiche = niche.replace(/[<>]/g, "");
+    const sanitizedGoal = goal.replace(/[<>]/g, "");
 
-    const message = 
-      `Olá Igor, meu nome é ${sanitizedName}. ` +
-      `Meu nicho é ${sanitizedNiche}. ` +
-      `Objetivo da minha landing page: ${sanitizedGoal}.`;
+    const message = isEnglish
+      ? `Hi Igor, my name is ${sanitizedName}. My niche is ${sanitizedNiche}. My landing page goal is: ${sanitizedGoal}.`
+      : `Olá Igor, meu nome é ${sanitizedName}. Meu nicho é ${sanitizedNiche}. Objetivo da minha landing page: ${sanitizedGoal}.`;
 
     const whatsappUrl = `https://wa.me/5547984054897?text=${encodeURIComponent(message)}`;
     // Pequeno delay para feedback visual
     setTimeout(() => {
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      trackEvent("quote_form_submit", {
+        lead_source: "form",
+        niche: sanitizedNiche
+      });
       button.textContent = originalText;
       button.disabled = false;
       // quoteForm.reset(); // Opcional: limpar formulário
     }, 700);
+  });
+}
+
+document.querySelectorAll("[data-track]").forEach((element) => {
+  element.addEventListener("click", () => {
+    trackEvent("cta_click", {
+      cta_name: element.getAttribute("data-track")
+    });
+  });
+});
+
+const revealTargets = document.querySelectorAll(
+  ".about, .process, .offer, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .card"
+);
+
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  revealTargets.forEach((element) => element.classList.add("is-visible"));
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.14,
+      rootMargin: "0px 0px -8% 0px"
+    }
+  );
+
+  revealTargets.forEach((element, index) => {
+    element.classList.add("reveal-on-scroll");
+    element.style.transitionDelay = `${Math.min(index * 0.03, 0.24)}s`;
+    revealObserver.observe(element);
   });
 }
 

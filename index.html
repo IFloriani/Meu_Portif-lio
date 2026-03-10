@@ -9,6 +9,29 @@
           gtag('js', new Date());
           gtag('config', 'G-L2QM099LRE');
         </script>
+        <script>
+          (function () {
+            try {
+              const storageKey = "preferred_lang";
+              const savedLang = localStorage.getItem(storageKey);
+              const path = window.location.pathname;
+              const isPtPage = path.endsWith("/") || path.endsWith("/index.html") || path === "";
+
+              if (!isPtPage || savedLang === "pt") {
+                return;
+              }
+
+              if (!savedLang) {
+                const browserLang = (navigator.language || "").toLowerCase();
+                if (browserLang.startsWith("en")) {
+                  window.location.replace("index-en.html");
+                }
+              }
+            } catch (error) {
+              // Ignore storage/navigation issues and keep default language.
+            }
+          })();
+        </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Igor Floriani | Portfólio de Landing Pages</title>
@@ -18,20 +41,26 @@
     />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seudominio.com">
+    <meta property="og:url" content="https://www.igorfloriani.com/">
     <meta property="og:title" content="Igor Floriani | Portfólio de Landing Pages">
     <meta property="og:description" content="Landing pages modernas, estratégicas e focadas em conversão para seu negócio.">
-    <meta property="og:image" content="https://seudominio.com/assets/og-image.jpg">
+    <meta property="og:image" content="https://www.igorfloriani.com/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Igor Floriani - Landing pages com foco em conversão">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://seudominio.com">
+    <meta property="twitter:url" content="https://www.igorfloriani.com/">
     <meta property="twitter:title" content="Igor Floriani | Portfólio de Landing Pages">
     <meta property="twitter:description" content="Landing pages modernas, estratégicas e focadas em conversão para seu negócio.">
-    <meta property="twitter:image" content="https://seudominio.com/assets/og-image.jpg">
+    <meta property="twitter:image" content="https://www.igorfloriani.com/assets/og-image.png">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://seudominio.com">
+    <link rel="canonical" href="https://www.igorfloriani.com/">
+    <link rel="alternate" hreflang="pt-BR" href="https://www.igorfloriani.com/">
+    <link rel="alternate" hreflang="en" href="https://www.igorfloriani.com/index-en.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.igorfloriani.com/">
 
     <!-- Robots meta -->
     <meta name="robots" content="index, follow">
@@ -40,6 +69,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=2" />
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=2" />
+    <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,7 +84,13 @@
     <div class="bg-shape bg-shape--two" aria-hidden="true"></div>
 
     <header class="hero">
-      <p class="hero__tag">Portfólio</p>
+      <div class="hero__top">
+        <p class="hero__tag">Portfólio</p>
+        <nav class="language-switch" aria-label="Seletor de idioma">
+          <a class="language-switch__link language-switch__link--active" data-lang="pt" href="index.html">PT</a>
+          <a class="language-switch__link" data-lang="en" href="index-en.html">EN</a>
+        </nav>
+      </div>
       <h1>Landing pages que transformam visitas em resultados</h1>
       <p class="hero__subtitle">
         Explore meus projetos. Clique em qualquer card para abrir a versão completa de cada landing
@@ -63,6 +99,7 @@
       <div class="hero__actions">
         <a
           class="action-btn action-btn--primary"
+          data-track="hero_whatsapp_cta"
           href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento%20para%20minha%20landing%20page."
           target="_blank"
           rel="noopener noreferrer"
@@ -71,11 +108,12 @@
         </a>
         <a
           class="action-btn"
-          href="https://instagram.com/florianiigor"
+          data-track="hero_linkedin_cta"
+          href="https://www.linkedin.com/in/florianiigor"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Ver Instagram
+          Ver LinkedIn
         </a>
       </div>
       <div class="trust-badges" aria-label="Diferenciais de atendimento">
@@ -149,7 +187,7 @@
           </article>
           <article class="highlight-card">
             <h3>Atendimento</h3>
-            <p>Resposta rápida via WhatsApp, Instagram e e-mail profissional.</p>
+            <p>Resposta rápida via WhatsApp, LinkedIn e e-mail profissional.</p>
           </article>
         </div>
       </section>
@@ -162,6 +200,7 @@
         </p>
         <a
           class="action-btn action-btn--primary"
+          data-track="offer_whatsapp_cta"
           href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20quero%20a%20an%C3%A1lise%20gratuita%20da%20minha%20landing%20page."
           target="_blank"
           rel="noopener noreferrer"
@@ -183,23 +222,28 @@
         <p class="plans__tag">Pacotes</p>
         <h2>Escolha o formato ideal para o seu momento.</h2>
         <p class="plans__note">
-          Cada rodada de ajustes considera um lote unico de alteracoes. Apos as rodadas inclusas,
-          novas demandas sao cobradas a parte por hora tecnica. Rodadas por pacote: Essencial (1),
-          Profissional (2) e Premium (3). A hospedagem padrao da pagina ja esta inclusa. O dominio
-          personalizado e contratado a parte, conforme o valor do provedor.
+          Cada rodada de ajustes considera um lote único de alterações. Após as rodadas inclusas,
+          novas demandas são cobradas à parte por hora técnica. Rodadas por pacote: Essencial (1),
+          Profissional (2) e Premium (3). A hospedagem padrão da página já está inclusa. O domínio
+          personalizado é contratado à parte, conforme o valor do provedor. A moeda exibida é
+          definida automaticamente pela região de acesso.
         </p>
         <div class="plans__grid">
           <article class="plan-card">
-            <h3>Presenca Digital</h3>
-            <p class="plan-card__price">A partir de R$ 790</p>
+            <h3>Presença Digital</h3>
+            <p class="plan-card__price">
+              A partir de
+              <span data-price-brl="R$ 790" data-price-usd="US$ 590">R$ 790</span>
+            </p>
             <ul>
-              <li>Pagina objetiva para apresentar seu servico com clareza</li>
-              <li>Visual profissional para passar mais confianca</li>
-              <li>Hospedagem padrao inclusa</li>
+              <li>Página objetiva para apresentar seu serviço com clareza</li>
+              <li>Visual profissional para transmitir mais confiança</li>
+              <li>Hospedagem padrão inclusa</li>
               <li>1 rodada de ajustes</li>
             </ul>
             <a
               class="action-btn"
+              data-track="plan_presenca_cta"
               href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20quero%20um%20or%C3%A7amento%20do%20pacote%20Presenca%20Digital."
               target="_blank"
               rel="noopener noreferrer"
@@ -208,16 +252,20 @@
           </article>
           <article class="plan-card plan-card--featured">
             <p class="plan-card__badge">Mais pedido</p>
-            <h3>Captacao de Leads</h3>
-            <p class="plan-card__price">A partir de R$ 1.390</p>
+            <h3>Captação de Leads</h3>
+            <p class="plan-card__price">
+              A partir de
+              <span data-price-brl="R$ 1.390" data-price-usd="US$ 1.090">R$ 1.390</span>
+            </p>
             <ul>
-              <li>Pagina completa para gerar mais leads qualificados</li>
-              <li>CTA estrategico com WhatsApp e formulario</li>
-              <li>Hospedagem padrao inclusa</li>
+              <li>Página completa para gerar mais leads qualificados</li>
+              <li>CTA estratégico com WhatsApp e formulário</li>
+              <li>Hospedagem padrão inclusa</li>
               <li>2 rodadas de ajustes</li>
             </ul>
             <a
               class="action-btn action-btn--primary"
+              data-track="plan_captacao_cta"
               href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20quero%20um%20or%C3%A7amento%20do%20pacote%20Captacao%20de%20Leads."
               target="_blank"
               rel="noopener noreferrer"
@@ -226,16 +274,20 @@
           </article>
           <article class="plan-card">
             <h3>Escala de Campanhas</h3>
-            <p class="plan-card__price">A partir de R$ 2.190</p>
+            <p class="plan-card__price">
+              A partir de
+              <span data-price-brl="R$ 2.190" data-price-usd="US$ 1.890">R$ 2.190</span>
+            </p>
             <ul>
-              <li>Estrutura avancada para campanhas e anuncios</li>
-              <li>Copy estrategica para aumentar conversao</li>
-              <li>Hospedagem padrao inclusa</li>
+              <li>Estrutura avançada para campanhas e anúncios</li>
+              <li>Copy estratégica para aumentar a conversão</li>
+              <li>Hospedagem padrão inclusa</li>
               <li>3 rodadas de ajustes</li>
-              <li>Suporte estendido no pos-entrega</li>
+              <li>Suporte estendido no pós-entrega</li>
             </ul>
             <a
               class="action-btn"
+              data-track="plan_escala_cta"
               href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20quero%20um%20or%C3%A7amento%20do%20pacote%20Escala%20de%20Campanhas."
               target="_blank"
               rel="noopener noreferrer"
@@ -285,10 +337,11 @@
           <p>Até 2 rodadas de ajustes para garantir alinhamento com seu objetivo.</p>
         </details>
         <details>
-          <summary>Como funciona ajuste extra apos as rodadas?</summary>
+          <summary>Como funciona ajuste extra após as rodadas?</summary>
           <p>
-            Apos as rodadas inclusas, novas alteracoes sao cobradas a parte: R$ 90/h, com minimo
-            de 1 hora por solicitacao.
+            Após as rodadas inclusas, novas alterações são cobradas à parte:
+            <span data-rate-brl="R$ 90/h" data-rate-usd="US$ 45/h">R$ 90/h</span>, com mínimo
+            de 1 hora por solicitação.
           </p>
         </details>
         <details>
@@ -296,11 +349,11 @@
           <p>Sim, posso deixar sua página pronta para publicação e orientar domínio/hospedagem.</p>
         </details>
         <details>
-          <summary>Dominio e hospedagem estao inclusos?</summary>
+          <summary>Domínio e hospedagem estão inclusos?</summary>
           <p>
-            A hospedagem padrao da sua landing ja esta inclusa no projeto. O dominio personalizado
-            e contratado a parte no provedor que voce preferir. Se quiser, eu cuido da configuracao
-            para voce.
+            A hospedagem padrão da sua landing já está inclusa no projeto. O domínio personalizado
+            é contratado à parte no provedor que você preferir. Se quiser, eu cuido da configuração
+            para você.
           </p>
         </details>
         <details>
@@ -345,6 +398,7 @@
         <div class="contact__actions">
           <a
             class="action-btn action-btn--primary"
+            data-track="contact_whatsapp_cta"
             href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento%20para%20minha%20landing%20page."
             target="_blank"
             rel="noopener noreferrer"
@@ -353,13 +407,14 @@
           </a>
           <a
             class="action-btn"
-            href="https://instagram.com/florianiigor"
+            data-track="contact_linkedin_cta"
+            href="https://www.linkedin.com/in/florianiigor"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Instagram: @florianiigor
+            LinkedIn: /in/florianiigor
           </a>
-          <a class="action-btn" href="mailto:igorfloriani.p@gmail.com">
+          <a class="action-btn" data-track="contact_email_cta" href="mailto:igorfloriani.p@gmail.com">
             E-mail: igorfloriani.p@gmail.com
           </a>
         </div>
@@ -368,13 +423,18 @@
 
     <footer class="footer">
       <p>
-        Feito por <strong>Igor Floriani</strong> • 2026 • @florianiigor •
+        Feito por <strong>Igor Floriani</strong> • 2026 •
+        <a href="https://www.linkedin.com/in/florianiigor" target="_blank" rel="noopener noreferrer"
+          >LinkedIn: /in/florianiigor</a
+        >
+        •
         <a href="mailto:igorfloriani.p@gmail.com">igorfloriani.p@gmail.com</a>
       </p>
     </footer>
 
     <a
       class="whatsapp-float"
+      data-track="float_whatsapp_cta"
       href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento%20para%20minha%20landing%20page."
       target="_blank"
       rel="noopener noreferrer"
@@ -392,14 +452,18 @@
           <div class="card__content">
             <h2 class="card__title"></h2>
             <p class="card__description"></p>
+            <ul class="card__case-list" aria-label="Resumo do estudo de caso">
+              <li><strong>Objetivo:</strong> <span class="card__goal"></span></li>
+              <li><strong>Solução:</strong> <span class="card__solution"></span></li>
+              <li><strong>Destaque:</strong> <span class="card__result"></span></li>
+            </ul>
             <span class="card__cta">Abrir landing page</span>
           </div>
         </a>
       </article>
     </template>
 
+    <button class="back-to-top" aria-label="Voltar ao topo" hidden>↑</button>
     <script src="script.js" defer></script>
   </body>
-  <button class="back-to-top" aria-label="Voltar ao topo" hidden>↑</button>
-</body>
 </html>
