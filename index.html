@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L2QM099LRE"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L2QM099LRE');
+        </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Igor Floriani | Portfólio de Landing Pages</title>
@@ -8,6 +16,25 @@
       name="description"
       content="Igor Floriani - Portfólio de landing pages modernas, estratégicas e focadas em conversão."
     />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seudominio.com">
+    <meta property="og:title" content="Igor Floriani | Portfólio de Landing Pages">
+    <meta property="og:description" content="Landing pages modernas, estratégicas e focadas em conversão para seu negócio.">
+    <meta property="og:image" content="https://seudominio.com/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://seudominio.com">
+    <meta property="twitter:title" content="Igor Floriani | Portfólio de Landing Pages">
+    <meta property="twitter:description" content="Landing pages modernas, estratégicas e focadas em conversão para seu negócio.">
+    <meta property="twitter:image" content="https://seudominio.com/assets/og-image.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://seudominio.com">
+
+    <!-- Robots meta -->
+    <meta name="robots" content="index, follow">
     <link rel="icon" type="image/x-icon" href="./favicon.ico?v=2" />
     <link rel="shortcut icon" href="./favicon.ico?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2" />
@@ -22,6 +49,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <div class="bg-shape bg-shape--one" aria-hidden="true"></div>
     <div class="bg-shape bg-shape--two" aria-hidden="true"></div>
 
@@ -57,8 +85,8 @@
       </div>
     </header>
 
-    <main>
-      <section class="about" id="sobre" aria-label="Sobre mim">
+    <main id="main-content">
+      <section class="about" id="sobre" aria-label="Sobre mim" lang="pt-BR">
         <p class="about__tag">Sobre mim</p>
         <h2>Sou Igor Floriani, desenvolvedor de landing pages com foco em conversão.</h2>
         <p>
@@ -81,7 +109,7 @@
           </article>
         </div>
       </section>
-      <section class="process" id="processo" aria-label="Como eu trabalho">
+      <section class="process" id="processo" aria-label="Como eu trabalho" lang="pt-BR">
         <p class="process__tag">Como eu trabalho</p>
         <h2>Processo simples, estratégico e focado em entrega.</h2>
         <div class="process__grid">
@@ -142,7 +170,7 @@
         </a>
       </section>
 
-      <section class="projects-section" aria-label="Projetos publicados">
+      <section class="projects-section" aria-label="Projetos publicados" lang="pt-BR">
         <p class="projects-section__tag">Projetos</p>
         <h2>Landing pages publicadas</h2>
         <p class="projects-section__subtitle">
@@ -151,7 +179,7 @@
         <section class="projects" id="projects" aria-label="Lista de projetos"></section>
       </section>
 
-      <section class="plans" id="planos" aria-label="Pacotes de serviço">
+      <section class="plans" id="planos" aria-label="Pacotes de serviço" lang="pt-BR">
         <p class="plans__tag">Pacotes</p>
         <h2>Escolha o formato ideal para o seu momento.</h2>
         <p class="plans__note">
@@ -217,7 +245,7 @@
         </div>
       </section>
 
-      <section class="testimonials" aria-label="Depoimentos">
+      <section class="testimonials" aria-label="Depoimentos" lang="pt-BR">
         <p class="testimonials__tag">Prova social</p>
         <h2>Feedbacks de clientes e parceiros.</h2>
         <div class="testimonials__grid">
@@ -245,7 +273,7 @@
         </div>
       </section>
 
-      <section class="faq" id="faq" aria-label="Perguntas frequentes">
+      <section class="faq" id="faq" aria-label="Perguntas frequentes" lang="pt-BR">
         <p class="faq__tag">FAQ</p>
         <h2>Perguntas frequentes</h2>
         <details>
@@ -285,7 +313,7 @@
         </details>
       </section>
 
-      <section class="lead-form" aria-label="Formulário de orçamento">
+      <section class="lead-form" aria-label="Formulário de orçamento" lang="pt-BR">
         <p class="lead-form__tag">Fale comigo</p>
         <h2>Prefere enviar os dados primeiro? Preencha e abra no WhatsApp.</h2>
         <form id="quote-form">
@@ -372,4 +400,6 @@
 
     <script src="script.js" defer></script>
   </body>
+  <button class="back-to-top" aria-label="Voltar ao topo" hidden>↑</button>
+</body>
 </html>

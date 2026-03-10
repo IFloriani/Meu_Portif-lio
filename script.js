@@ -1,3 +1,20 @@
+// Mostrar/esconder botão voltar ao topo
+const backToTop = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backToTop.hidden = false;
+  } else {
+    backToTop.hidden = true;
+  }
+});
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
 const projects = [
   {
     title: "Glow Estética",
@@ -65,17 +82,51 @@ if (quoteForm) {
   quoteForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const formData = new FormData(quoteForm);
-    const name = formData.get("name");
-    const niche = formData.get("niche");
-    const goal = formData.get("goal");
+    const name = quoteForm.name.value.trim();
+    const niche = quoteForm.niche.value.trim();
+    const goal = quoteForm.goal.value.trim();
 
-    const message =
-      `Ola Igor, meu nome e ${name}. ` +
-      `Meu nicho e ${niche}. ` +
-      `Objetivo da minha landing page: ${goal}.`;
+    // Validação básica
+    if (!name || !niche || !goal) {
+      alert('Por favor, preencha todos os campos');
+      return;
+    }
+
+    if (name.length < 2) {
+      alert('Nome deve ter pelo menos 2 caracteres');
+      return;
+    }
+
+    const button = quoteForm.querySelector("button[type='submit']");
+    const originalText = button.textContent;
+    button.textContent = "Enviando...";
+    button.disabled = true;
+
+    // Sanitização básica
+    const sanitizedName = name.replace(/[<>]/g, '');
+    const sanitizedNiche = niche.replace(/[<>]/g, '');
+    const sanitizedGoal = goal.replace(/[<>]/g, '');
+
+    const message = 
+      `Olá Igor, meu nome é ${sanitizedName}. ` +
+      `Meu nicho é ${sanitizedNiche}. ` +
+      `Objetivo da minha landing page: ${sanitizedGoal}.`;
 
     const whatsappUrl = `https://wa.me/5547984054897?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    // Pequeno delay para feedback visual
+    setTimeout(() => {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      button.textContent = originalText;
+      button.disabled = false;
+      // quoteForm.reset(); // Opcional: limpar formulário
+    }, 700);
+  });
+}
+
+// Adicione lazy loading para imagens fora da viewport
+if ('loading' in HTMLImageElement.prototype) {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach(img => {
+    img.loading = 'lazy';
   });
 }

@@ -1,3 +1,46 @@
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent);
+  color: #071125;
+  padding: 8px;
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+/* Botão Voltar ao Topo */
+.back-to-top {
+  position: fixed;
+  bottom: 80px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: rgba(8, 16, 40, 0.9);
+  color: var(--accent);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 19;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px);
+  background: var(--accent);
+  color: #071125;
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
 :root {
   --bg-0: #090c1c;
   --bg-1: #121a3f;
@@ -7,6 +50,14 @@
   --accent: #6ff0ff;
   --accent-2: #8f7bff;
   --shadow: 0 28px 50px rgba(4, 8, 30, 0.55);
+  /* scroll-behavior agora é condicional via media query */
+}
+
+/* Adicione smooth scrolling only when reduced motion is not preferred */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
 }
 
 * {
@@ -640,6 +691,7 @@ body::after {
   background: #04091c;
   border-radius: 10px;
   transition: transform 0.4s ease;
+  aspect-ratio: 16 / 9;
 }
 
 .card__content {
@@ -738,26 +790,26 @@ body::after {
 }
 
 @media (max-width: 680px) {
-    .plan-card,
-    .plan-card--featured,
-    .testimonial-card,
-    .card,
-    .trust-badges span {
-      background: #18224a !important;
-      color: #fff !important;
-      border-color: #6ff0ff !important;
-      opacity: 1 !important;
-      box-shadow: 0 2px 12px 0 #0002;
+    /* Suavize a transição de cores */
+    body {
+      transition: background 0.3s ease;
     }
-    .plan-card__price,
-    .plan-card__badge,
-    .card__description,
-    .testimonial-card p,
-    .testimonial-card span {
-      color: #fff !important;
+
+    /* Ajuste o contraste dos textos */
+    .hero__subtitle,
+    .about p,
+    .process p {
+      color: rgba(255, 255, 255, 0.9);
     }
-  .plan-card,
-  .testimonial-card,
+  :root {
+    --bg-0: #18224a;
+    --bg-1: #18224a;
+    --ink: #fff;
+    --muted: #e0e6f5;
+    --line: #6ff0ff;
+    --accent: #6ff0ff;
+    --accent-2: #8f7bff;
+  }
   body::after {
     background-position: top center;
     opacity: 0.18;
