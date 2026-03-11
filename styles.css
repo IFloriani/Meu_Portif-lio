@@ -884,10 +884,33 @@ body::after {
 }
 
 @media (max-width: 980px) {
-  body::before,
-  body::after,
+  body::before {
+    opacity: 0.6;
+    background-size: 28px 28px;
+  }
+
+  body::after {
+    opacity: 0.1;
+    filter: blur(8px) saturate(112%);
+  }
+
   .bg-shape {
-    display: none;
+    opacity: 0.34;
+    filter: blur(16px);
+  }
+
+  .bg-shape--one {
+    width: 250px;
+    height: 250px;
+    top: -54px;
+    right: -38px;
+  }
+
+  .bg-shape--two {
+    width: 310px;
+    height: 310px;
+    bottom: -96px;
+    left: -90px;
   }
 
   .projects.projects--three {
@@ -926,8 +949,33 @@ body::after {
     --accent: #6ff0ff;
     --accent-2: #8f7bff;
   }
+  body::before {
+    opacity: 0.46;
+    background-size: 24px 24px;
+  }
+
   body::after {
-    display: none;
+    opacity: 0.08;
+    filter: blur(6px) saturate(108%);
+  }
+
+  .bg-shape {
+    opacity: 0.26;
+    filter: blur(14px);
+  }
+
+  .bg-shape--one {
+    width: 210px;
+    height: 210px;
+    top: -48px;
+    right: -56px;
+  }
+
+  .bg-shape--two {
+    width: 250px;
+    height: 250px;
+    bottom: -84px;
+    left: -86px;
   }
 
   .hero {
