@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /privacy.html
+Allow: /privacy-en.html
+Allow: /checklist-entrega.html
+
+# Disallow crawling of assets folder (optional - for performance)
+# Disallow: /assets/
 
 Sitemap: https://www.igorfloriani.com/sitemap.xml
