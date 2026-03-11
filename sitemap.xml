@@ -39,12 +39,4 @@
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.igorfloriani.com/privacy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.igorfloriani.com/privacy-en.html" />
   </url>
-
-  <!-- Project Delivery Checklist (Internal Reference) -->
-  <url>
-    <loc>https://www.igorfloriani.com/checklist-entrega.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
 </urlset>
