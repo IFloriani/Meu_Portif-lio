@@ -890,6 +890,10 @@ body::after {
   justify-content: center;
 }
 
+.cookie-banner[hidden] {
+  display: none !important;
+}
+
 .cookie-banner__content {
   width: min(100%, 860px);
   padding: 16px 18px;
