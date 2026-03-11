@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist de Entrega por Pacote — Igor Floriani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Orbitron:wght@500;700;800&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0:     #090c1c;
+      --bg-1:     #0e1228;
+      --bg-card:  #111728;
+      --accent:   #6ff0ff;
+      --accent-2: #8f7bff;
+      --text:     #e4eaf6;
+      --muted:    #7a8aaa;
+      --border:   rgba(111,240,255,.18);
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background: var(--bg-0);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-name {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .header-meta strong { color: var(--text); }
+
+    /* ── Title ── */
+    .page-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+      letter-spacing: .04em;
+    }
+
+    .page-subtitle {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    /* ── Tabs ── */
+    .tabs-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tab-btn.active {
+      background: rgba(111, 240, 255, 0.12);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tab-btn[data-plan="essencial"].active {
+      background: rgba(111, 240, 255, 0.12);
+    }
+
+    .tab-btn[data-plan="profissional"].active {
+      background: rgba(159, 140, 255, 0.12);
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    .tab-btn[data-plan="premium"].active {
+      background: rgba(58, 95, 212, 0.12);
+      border-color: #3a5fd4;
+      color: #6ff0ff;
+    }
+
+    /* ── Section ── */
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Orbitron", sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 18px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent-2);
+      border-radius: 2px;
+    }
+
+    /* ── Checklist items ── */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .9rem;
+      line-height: 1.5;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checklist li .box {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, border-color .15s;
+    }
+
+    .checklist li .box svg {
+      display: none;
+      width: 11px;
+      height: 11px;
+      stroke: #090c1c;
+    }
+
+    .checklist li.done .box {
+      background: var(--accent);
+    }
+
+    .checklist li.done .box svg {
+      display: block;
+    }
+
+    .checklist li.done .label {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 32px 0;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: .9rem;
+    }
+
+    .progress-info span:first-child {
+      color: var(--muted);
+    }
+
+    .progress-info span:last-child {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(111, 240, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .footer a:hover {
+      color: var(--accent-2);
+    }
+
+    .plan-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .plan-label.essencial {
+      background: rgba(111, 240, 255, 0.15);
+      color: var(--accent);
+    }
+
+    .plan-label.profissional {
+      background: rgba(159, 140, 255, 0.15);
+      color: var(--accent-2);
+    }
+
+    .plan-label.premium {
+      background: rgba(58, 95, 212, 0.15);
+      color: #6ff0ff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; color: black; }
+      .tabs-container { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .page-title { font-size: 1.05rem; }
+      .tabs-container { gap: 8px; }
+      .tab-btn { padding: 8px 14px; font-size: .85rem; }
+      .section { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="header">
+      <div>
+        <div class="logo-name">IF</div>
+      </div>
+      <div class="header-meta">
+        <strong>Checklist de Entrega</strong><br>
+        <span id="today-date">carregando...</span>
+      </div>
+    </div>
+
+    <h1 class="page-title">Checklist por Pacote</h1>
+    <p class="page-subtitle">Selecione o pacote para visualizar o checklist específico. O progresso é salvo automaticamente.</p>
+
+    <!-- Seletor de Pacotes -->
+    <div class="tabs-container">
+      <button class="tab-btn active" data-plan="essencial">💎 Essencial</button>
+      <button class="tab-btn" data-plan="profissional">🚀 Profissional</button>
+      <button class="tab-btn" data-plan="premium">👑 Premium</button>
+    </div>
+
+    <!-- Checklist Essencial -->
+    <div class="plan-checklist" data-plan="essencial">
+      <section class="section">
+        <div class="section-title">Antes de começar</div>
+        <ul class="checklist">
+          <li data-id="2"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Domínio registrado e DNS acessível</span></li>
+          <li data-id="3"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Briefing preenchido: nicho, público, objetivo, CTA principal</span></li>
+          <li data-id="4"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Textos, logo e imagens recebidos do cliente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Durante o desenvolvimento</div>
+        <ul class="checklist">
+          <li data-id="7"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Versão mobile testada (320px, 375px, 768px)</span></li>
+          <li data-id="8"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Velocidade verificada no Google PageSpeed Insights</span></li>
+          <li data-id="9"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Meta tags configuradas: title, description, og:image, canonical</span></li>
+          <li data-id="10"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">robots.txt e sitemap.xml criados</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Na entrega</div>
+        <ul class="checklist">
+          <li data-id="11"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Deploy feito e URL de produção funcionando</span></li>
+          <li data-id="15"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Formulário / WhatsApp testado: mensagem chega corretamente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Documentação entregue ao cliente</div>
+        <ul class="checklist">
+          <li data-id="17"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">URL de produção enviada ao cliente</span></li>
+          <li data-id="19"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Instruções básicas de uso / alteração de textos enviadas</span></li>
+          <li data-id="20"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Prazo de garantia e contato de suporte esclarecidos</span></li>
+        </ul>
+      </section>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Progresso (Essencial)</span>
+          <span id="progress-essencial-label">0 / 12 concluídos</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-essencial"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checklist Profissional -->
+    <div class="plan-checklist hidden" data-plan="profissional">
+      <section class="section">
+        <div class="section-title">Antes de começar</div>
+        <ul class="checklist">
+          <li data-id="1"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente criou a conta no Google Analytics e forneceu o ID (G-...)</span></li>
+          <li data-id="2"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Domínio registrado e DNS acessível</span></li>
+          <li data-id="3"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Briefing preenchido: nicho, público, objetivo, CTA principal</span></li>
+          <li data-id="4"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Textos, logo e imagens recebidos do cliente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Durante o desenvolvimento</div>
+        <ul class="checklist">
+          <li data-id="5"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Código GA4 inserido com o ID do cliente</span></li>
+          <li data-id="6"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Eventos de rastreamento configurados (CTA, formulário, WhatsApp)</span></li>
+          <li data-id="7"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Versão mobile testada (320px, 375px, 768px)</span></li>
+          <li data-id="8"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Velocidade verificada no Google PageSpeed Insights</span></li>
+          <li data-id="9"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Meta tags configuradas: title, description, og:image, canonical</span></li>
+          <li data-id="10"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">robots.txt e sitemap.xml criados</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Na entrega</div>
+        <ul class="checklist">
+          <li data-id="11"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Deploy feito e URL de produção funcionando</span></li>
+          <li data-id="12"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente verificou o domínio no Google Search Console</span></li>
+          <li data-id="13"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Sitemap enviado no Search Console (/sitemap.xml)</span></li>
+          <li data-id="14"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">GA4 testado em Tempo Real (evento aparece ao acessar a página)</span></li>
+          <li data-id="15"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Formulário / WhatsApp testado: mensagem chega corretamente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Documentação entregue ao cliente</div>
+        <ul class="checklist">
+          <li data-id="17"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">URL de produção enviada ao cliente</span></li>
+          <li data-id="19"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Instruções básicas de uso / alteração de textos enviadas</span></li>
+          <li data-id="20"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Prazo de garantia e contato de suporte esclarecidos</span></li>
+        </ul>
+      </section>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Progresso (Profissional)</span>
+          <span id="progress-profissional-label">0 / 17 concluídos</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-profissional"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checklist Premium -->
+    <div class="plan-checklist hidden" data-plan="premium">
+      <section class="section">
+        <div class="section-title">Antes de começar</div>
+        <ul class="checklist">
+          <li data-id="1"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente criou a conta no Google Analytics e forneceu o ID (G-...)</span></li>
+          <li data-id="2"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Domínio registrado e DNS acessível</span></li>
+          <li data-id="3"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Briefing preenchido: nicho, público, objetivo, CTA principal</span></li>
+          <li data-id="4"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Textos, logo e imagens recebidos do cliente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Durante o desenvolvimento</div>
+        <ul class="checklist">
+          <li data-id="5"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Código GA4 inserido com o ID do cliente</span></li>
+          <li data-id="6"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Eventos de rastreamento configurados (CTA, formulário, WhatsApp)</span></li>
+          <li data-id="7"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Versão mobile testada (320px, 375px, 768px)</span></li>
+          <li data-id="8"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Velocidade verificada no Google PageSpeed Insights</span></li>
+          <li data-id="9"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Meta tags configuradas: title, description, og:image, canonical</span></li>
+          <li data-id="10"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">robots.txt e sitemap.xml criados</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Na entrega</div>
+        <ul class="checklist">
+          <li data-id="11"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Deploy feito e URL de produção funcionando</span></li>
+          <li data-id="12"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente verificou o domínio no Google Search Console</span></li>
+          <li data-id="13"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Sitemap enviado no Search Console (/sitemap.xml)</span></li>
+          <li data-id="14"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">GA4 testado em Tempo Real (evento aparece ao acessar a página)</span></li>
+          <li data-id="15"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Formulário / WhatsApp testado: mensagem chega corretamente</span></li>
+          <li data-id="16"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Acesso de Editor no GA4 configurado para o cliente</span></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Documentação entregue ao cliente</div>
+        <ul class="checklist">
+          <li data-id="17"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">URL de produção enviada ao cliente</span></li>
+          <li data-id="18"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Acesso ao repositório entregue (Git + instruções de Pull)</span></li>
+          <li data-id="19"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Instruções básicas de uso / alteração de textos enviadas</span></li>
+          <li data-id="20"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Prazo de garantia e contato de suporte esclarecidos</span></li>
+        </ul>
+      </section>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Progresso (Premium)</span>
+          <span id="progress-premium-label">0 / 20 concluídos</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-premium"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Igor Floriani · <a href="https://www.igorfloriani.com" target="_blank" rel="noopener">igorfloriani.com</a> · <a href="https://www.linkedin.com/in/florianiigor" target="_blank" rel="noopener">LinkedIn</a></p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("today-date").textContent =
+      new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+
+    const STORAGE_PREFIX = "checklist_pacote_";
+    const plans = ["essencial", "profissional", "premium"];
+    const itemCounts = {
+      essencial: 12,
+      profissional: 17,
+      premium: 20
+    };
+
+    // Switch between plans
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const plan = btn.dataset.plan;
+        
+        // Update active tab
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // Update visible checklist
+        document.querySelectorAll(".plan-checklist").forEach(c => c.classList.add("hidden"));
+        document.querySelector(`[data-plan="${plan}"]`).classList.remove("hidden");
+
+        updateProgress(plan);
+      });
+    });
+
+    // Checklist interactivity
+    document.querySelectorAll(".checklist li").forEach(item => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("done");
+        
+        // Save to localStorage for each plan
+        const allDone = [];
+        const planChecklists = document.querySelectorAll(".plan-checklist:not(.hidden)");
+        planChecklists.forEach(checklist => {
+          const items = checklist.querySelectorAll(".checklist li");
+          items.forEach(li => {
+            if (li.classList.contains("done")) {
+              allDone.push(li.dataset.id);
+            }
+          });
+        });
+
+        const activePlan = document.querySelector(".tab-btn.active").dataset.plan;
+        localStorage.setItem(STORAGE_PREFIX + activePlan, JSON.stringify(allDone));
+        
+        updateProgress(activePlan);
+      });
+    });
+
+    function updateProgress(plan) {
+      const checklist = document.querySelector(`.plan-checklist[data-plan="${plan}"] .checklist`);
+      const total = checklist.querySelectorAll("li").length;
+      const done = checklist.querySelectorAll("li.done").length;
+      
+      const progressBar = document.getElementById(`progress-${plan}`);
+      const progressLabel = document.getElementById(`progress-${plan}-label`);
+      
+      const percentage = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = percentage + "%";
+      progressLabel.textContent = `${done} / ${total} concluídos`;
+    }
+
+    // Load saved state
+    plans.forEach(plan => {
+      const saved = localStorage.getItem(STORAGE_PREFIX + plan);
+      if (saved) {
+        const ids = JSON.parse(saved);
+        const checklist = document.querySelector(`.plan-checklist[data-plan="${plan}"]`);
+        checklist.querySelectorAll(".checklist li").forEach(li => {
+          if (ids.includes(li.dataset.id)) {
+            li.classList.add("done");
+          }
+        });
+      }
+    });
+
+    // Initial progress update
+    updateProgress("essencial");
+  </script>
+</body>
+</html>
