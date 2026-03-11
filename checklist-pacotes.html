@@ -538,29 +538,27 @@
       item.addEventListener("click", () => {
         item.classList.toggle("done");
         
-        // Save to localStorage for each plan
+        const activePlan = document.querySelector(".tab-btn.active").dataset.plan;
+        const planDiv = document.querySelector(`.plan-checklist[data-plan="${activePlan}"]`);
+        
+        // Save to localStorage for this plan
         const allDone = [];
-        const planChecklists = document.querySelectorAll(".plan-checklist:not(.hidden)");
-        planChecklists.forEach(checklist => {
-          const items = checklist.querySelectorAll(".checklist li");
-          items.forEach(li => {
-            if (li.classList.contains("done")) {
-              allDone.push(li.dataset.id);
-            }
-          });
+        planDiv.querySelectorAll(".checklist li").forEach(li => {
+          if (li.classList.contains("done")) {
+            allDone.push(li.dataset.id);
+          }
         });
 
-        const activePlan = document.querySelector(".tab-btn.active").dataset.plan;
         localStorage.setItem(STORAGE_PREFIX + activePlan, JSON.stringify(allDone));
-        
         updateProgress(activePlan);
       });
     });
 
     function updateProgress(plan) {
-      const checklist = document.querySelector(`.plan-checklist[data-plan="${plan}"] .checklist`);
-      const total = checklist.querySelectorAll("li").length;
-      const done = checklist.querySelectorAll("li.done").length;
+      const planDiv = document.querySelector(`.plan-checklist[data-plan="${plan}"]`);
+      const allItems = planDiv.querySelectorAll(".checklist li");
+      const total = allItems.length;
+      const done = planDiv.querySelectorAll(".checklist li.done").length;
       
       const progressBar = document.getElementById(`progress-${plan}`);
       const progressLabel = document.getElementById(`progress-${plan}-label`);
