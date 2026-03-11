@@ -527,7 +527,7 @@
 
         // Update visible checklist
         document.querySelectorAll(".plan-checklist").forEach(c => c.classList.add("hidden"));
-        document.querySelector(`[data-plan="${plan}"]`).classList.remove("hidden");
+        document.querySelector(`.plan-checklist[data-plan="${plan}"]`).classList.remove("hidden");
 
         updateProgress(plan);
       });
