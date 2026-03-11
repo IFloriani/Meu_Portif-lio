@@ -1,13 +1,10 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L2QM099LRE"></script>
         <script>
+          window.GA_MEASUREMENT_ID = "G-L2QM099LRE";
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-L2QM099LRE');
         </script>
         <script>
           (function () {
@@ -36,6 +33,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Igor Floriani" />
     <meta name="theme-color" content="#090c1c" />
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.google-analytics.com https://www.googletagmanager.com https://www.igorfloriani.com; img-src 'self' data: https:; media-src 'none'; object-src 'none'; frame-src 'none'" />
     <title>Igor Floriani | Portfólio de Landing Pages</title>
     <meta
       name="description"
@@ -321,22 +325,23 @@
         <p class="plans__tag">Pacotes</p>
         <h2>Escolha o formato ideal para o seu momento.</h2>
         <p class="plans__note">
-          Cada rodada de ajustes considera um lote único de alterações. Após as rodadas inclusas,
-          novas demandas são cobradas à parte por hora técnica. Rodadas por pacote: Essencial (1),
-          Profissional (2) e Premium (3). A hospedagem padrão da página já está inclusa. O domínio
-          personalizado é contratado à parte, conforme o valor do provedor. A moeda exibida é
-          definida automaticamente pela região de acesso.
+          Os pacotes foram organizados em três níveis: presença, medição e operação premium. Cada
+          rodada de ajustes considera um lote único de alterações. Após as rodadas inclusas, novas
+          demandas são cobradas à parte por hora técnica. A hospedagem padrão da página já está
+          inclusa. O domínio personalizado é contratado à parte, conforme o valor do provedor. A
+          moeda exibida é definida automaticamente pela região de acesso.
         </p>
         <div class="plans__grid">
           <article class="plan-card">
+            <p class="plan-card__badge">Essencial</p>
             <h3>Presença Digital</h3>
             <p class="plan-card__price">
               A partir de
               <span data-price-brl="R$ 790" data-price-usd="US$ 590">R$ 790</span>
             </p>
             <ul>
-              <li>Página objetiva para apresentar seu serviço com clareza</li>
-              <li>Visual profissional para transmitir mais confiança</li>
+              <li>Landing page responsiva com visual profissional e CTA principal</li>
+              <li>SEO básico com title, description, favicon e compartilhamento social</li>
               <li>Hospedagem padrão inclusa</li>
               <li>1 rodada de ajustes</li>
             </ul>
@@ -350,15 +355,16 @@
             >
           </article>
           <article class="plan-card plan-card--featured">
-            <p class="plan-card__badge">Mais pedido</p>
+            <p class="plan-card__badge">Profissional • Mais pedido</p>
             <h3>Captação de Leads</h3>
             <p class="plan-card__price">
               A partir de
               <span data-price-brl="R$ 1.390" data-price-usd="US$ 1.090">R$ 1.390</span>
             </p>
             <ul>
-              <li>Página completa para gerar mais leads qualificados</li>
-              <li>CTA estratégico com WhatsApp e formulário</li>
+              <li>Página completa para gerar leads com WhatsApp e formulário</li>
+              <li>Google Analytics 4 com rastreamento dos principais cliques</li>
+              <li>Search Console, sitemap e robots configurados</li>
               <li>Hospedagem padrão inclusa</li>
               <li>2 rodadas de ajustes</li>
             </ul>
@@ -371,15 +377,17 @@
               >Quero este pacote</a
             >
           </article>
-          <article class="plan-card">
+          <article class="plan-card plan-card--premium">
+            <p class="plan-card__badge plan-card__badge--premium">Premium</p>
             <h3>Escala de Campanhas</h3>
             <p class="plan-card__price">
               A partir de
               <span data-price-brl="R$ 2.190" data-price-usd="US$ 1.890">R$ 2.190</span>
             </p>
             <ul>
-              <li>Estrutura avançada para campanhas e anúncios</li>
-              <li>Copy estratégica para aumentar a conversão</li>
+              <li>Estrutura avançada para campanhas, anúncios e operação comercial</li>
+              <li>Copy estratégica, eventos ampliados e setup técnico mais completo</li>
+              <li>Consentimento de cookies, SEO técnico e segurança básica reforçada</li>
               <li>Hospedagem padrão inclusa</li>
               <li>3 rodadas de ajustes</li>
               <li>Suporte estendido no pós-entrega</li>
@@ -530,6 +538,23 @@
         <a href="mailto:igorfloriani.p@gmail.com">igorfloriani.p@gmail.com</a>
       </p>
     </footer>
+
+    <section class="cookie-banner" data-cookie-banner hidden aria-live="polite" aria-label="Aviso de cookies">
+      <div class="cookie-banner__content">
+        <p>
+          Este site usa cookies de analytics para medir visitas e cliques nos botões. Você pode
+          aceitar para ativar o Google Analytics ou recusar e continuar navegando normalmente.
+        </p>
+        <div class="cookie-banner__actions">
+          <button class="action-btn action-btn--primary" type="button" data-cookie-action="accept">
+            Aceitar analytics
+          </button>
+          <button class="action-btn" type="button" data-cookie-action="decline">
+            Recusar
+          </button>
+        </div>
+      </div>
+    </section>
 
     <a
       class="whatsapp-float"

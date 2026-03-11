@@ -1,20 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L2QM099LRE"></script>
     <script>
+      window.GA_MEASUREMENT_ID = "G-L2QM099LRE";
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
-      gtag("config", "G-L2QM099LRE");
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Igor Floriani" />
     <meta name="theme-color" content="#090c1c" />
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.google-analytics.com https://www.googletagmanager.com https://www.igorfloriani.com; img-src 'self' data: https:; media-src 'none'; object-src 'none'; frame-src 'none'" />
     <title>Igor Floriani | Landing Page Portfolio</title>
     <meta
       name="description"
@@ -308,22 +312,23 @@
         <p class="plans__tag">Packages</p>
         <h2>Choose the right format for your current stage.</h2>
         <p class="plans__note">
+          Packages are organized into three levels: presence, measurement, and premium operation.
           Each revision round includes a single batch of changes. After included rounds, extra
-          requests are billed separately per technical hour. Included rounds by package: Essential
-          (1), Professional (2), and Premium (3). Standard page hosting is included. Custom domain
-          is purchased separately according to your provider. Displayed currency is automatically
-          locked based on visitor region.
+          requests are billed separately per technical hour. Standard page hosting is included.
+          Custom domain is purchased separately according to your provider. Displayed currency is
+          automatically locked based on visitor region.
         </p>
         <div class="plans__grid">
           <article class="plan-card">
+            <p class="plan-card__badge">Essential</p>
             <h3>Digital Presence</h3>
             <p class="plan-card__price">
               Starting at
               <span data-price-brl="BRL 790" data-price-usd="USD 590">USD 590</span>
             </p>
             <ul>
-              <li>Objective page to present your service with clarity</li>
-              <li>Professional visual to increase trust</li>
+              <li>Responsive landing page with professional design and a clear main CTA</li>
+              <li>Basic SEO with title, description, favicon, and social sharing setup</li>
               <li>Standard hosting included</li>
               <li>1 revision round</li>
             </ul>
@@ -337,15 +342,16 @@
             >
           </article>
           <article class="plan-card plan-card--featured">
-            <p class="plan-card__badge">Most requested</p>
+            <p class="plan-card__badge">Professional • Most requested</p>
             <h3>Lead Generation</h3>
             <p class="plan-card__price">
               Starting at
               <span data-price-brl="BRL 1,390" data-price-usd="USD 1,090">USD 1,090</span>
             </p>
             <ul>
-              <li>Complete page to generate more qualified leads</li>
-              <li>Strategic CTA with WhatsApp and form</li>
+              <li>Complete page focused on lead generation with WhatsApp and form</li>
+              <li>Google Analytics 4 with tracking for the main CTA clicks</li>
+              <li>Search Console, sitemap, and robots properly configured</li>
               <li>Standard hosting included</li>
               <li>2 revision rounds</li>
             </ul>
@@ -358,15 +364,17 @@
               >I want this package</a
             >
           </article>
-          <article class="plan-card">
+          <article class="plan-card plan-card--premium">
+            <p class="plan-card__badge plan-card__badge--premium">Premium</p>
             <h3>Campaign Scale</h3>
             <p class="plan-card__price">
               Starting at
               <span data-price-brl="BRL 2,190" data-price-usd="USD 1,890">USD 1,890</span>
             </p>
             <ul>
-              <li>Advanced structure for campaigns and paid ads</li>
-              <li>Strategic copy to improve conversion</li>
+              <li>Advanced structure for campaigns, paid ads, and commercial operation</li>
+              <li>Strategic copy, expanded event tracking, and deeper technical setup</li>
+              <li>Cookie consent, technical SEO, and reinforced baseline security</li>
               <li>Standard hosting included</li>
               <li>3 revision rounds</li>
               <li>Extended post-delivery support</li>
@@ -516,6 +524,23 @@
         <a href="mailto:igorfloriani.p@gmail.com">igorfloriani.p@gmail.com</a>
       </p>
     </footer>
+
+    <section class="cookie-banner" data-cookie-banner hidden aria-live="polite" aria-label="Cookie notice">
+      <div class="cookie-banner__content">
+        <p>
+          This site uses analytics cookies to measure visits and button clicks. You can accept to
+          enable Google Analytics or decline and keep browsing normally.
+        </p>
+        <div class="cookie-banner__actions">
+          <button class="action-btn action-btn--primary" type="button" data-cookie-action="accept">
+            Accept analytics
+          </button>
+          <button class="action-btn" type="button" data-cookie-action="decline">
+            Decline
+          </button>
+        </div>
+      </div>
+    </section>
 
     <a
       class="whatsapp-float"

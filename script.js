@@ -1,6 +1,53 @@
+let analyticsEnabled = false;
+let analyticsLoaded = false;
+
 function trackEvent(eventName, params = {}) {
-  if (typeof window.gtag === "function") {
+  if (analyticsEnabled && typeof window.gtag === "function") {
     window.gtag("event", eventName, params);
+  }
+}
+
+const consentStorageKey = "analytics_consent_v1";
+
+function loadAnalytics() {
+  if (analyticsLoaded || !window.GA_MEASUREMENT_ID) {
+    return;
+  }
+
+  analyticsLoaded = true;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${window.GA_MEASUREMENT_ID}`;
+  document.head.appendChild(script);
+
+  window.gtag("js", new Date());
+  window.gtag("config", window.GA_MEASUREMENT_ID, {
+    anonymize_ip: true
+  });
+}
+
+function getStoredConsent() {
+  try {
+    return localStorage.getItem(consentStorageKey);
+  } catch (error) {
+    return null;
+  }
+}
+
+function persistConsent(value) {
+  try {
+    localStorage.setItem(consentStorageKey, value);
+  } catch (error) {
+    // Ignore storage errors and keep browsing usable.
+  }
+}
+
+function applyAnalyticsConsent(value) {
+  analyticsEnabled = value === "accepted";
+
+  if (analyticsEnabled) {
+    loadAnalytics();
   }
 }
 
@@ -43,6 +90,34 @@ detectVisitorCountry().then((countryCode) => {
 });
 
 const isEnglish = document.documentElement.lang.toLowerCase().startsWith("en");
+const cookieBanner = document.querySelector("[data-cookie-banner]");
+
+applyAnalyticsConsent(getStoredConsent());
+
+if (cookieBanner) {
+  const storedConsent = getStoredConsent();
+
+  if (!storedConsent) {
+    cookieBanner.hidden = false;
+  }
+
+  cookieBanner.querySelectorAll("[data-cookie-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const action = button.getAttribute("data-cookie-action");
+      const consentValue = action === "accept" ? "accepted" : "declined";
+
+      persistConsent(consentValue);
+      applyAnalyticsConsent(consentValue);
+      cookieBanner.hidden = true;
+
+      if (consentValue === "accepted") {
+        trackEvent("cookie_consent_accept", {
+          consent_scope: "analytics"
+        });
+      }
+    });
+  });
+}
 
 document.querySelectorAll(".language-switch__link[data-lang]").forEach((link) => {
   link.addEventListener("click", () => {
@@ -51,6 +126,10 @@ document.querySelectorAll(".language-switch__link[data-lang]").forEach((link) =>
     } catch (error) {
       // Ignore storage errors and keep navigation flow.
     }
+
+    trackEvent("language_switch_click", {
+      target_language: link.getAttribute("data-lang")
+    });
   });
 });
 
@@ -150,6 +229,12 @@ function createCard(project) {
     "aria-label",
     isEnglish ? `Open project ${titleText}` : `Abrir projeto ${titleText}`
   );
+
+  link.addEventListener("click", () => {
+    trackEvent("portfolio_project_open", {
+      project_name: titleText
+    });
+  });
 
   title.textContent = titleText;
   description.textContent = descriptionText;
