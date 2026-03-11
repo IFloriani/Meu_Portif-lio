@@ -908,8 +908,7 @@ body::after {
     --accent-2: #8f7bff;
   }
   body::after {
-    background-position: top center;
-    opacity: 0.18;
+    display: none;
   }
 
   .hero {

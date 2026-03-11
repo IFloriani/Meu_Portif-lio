@@ -34,6 +34,8 @@
         </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Igor Floriani" />
+    <meta name="theme-color" content="#090c1c" />
     <title>Igor Floriani | Portfólio de Landing Pages</title>
     <meta
       name="description"
@@ -41,6 +43,8 @@
     />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="en_US">
     <meta property="og:url" content="https://www.igorfloriani.com/">
     <meta property="og:title" content="Igor Floriani | Portfólio de Landing Pages">
     <meta property="og:description" content="Landing pages modernas, estratégicas e focadas em conversão para seu negócio.">
@@ -62,8 +66,86 @@
     <link rel="alternate" hreflang="en" href="https://www.igorfloriani.com/index-en.html">
     <link rel="alternate" hreflang="x-default" href="https://www.igorfloriani.com/">
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.igorfloriani.com/#service",
+            "name": "Igor Floriani - Landing Pages",
+            "url": "https://www.igorfloriani.com/",
+            "image": "https://www.igorfloriani.com/assets/og-image.png",
+            "description": "Desenvolvimento de landing pages modernas, estratégicas e focadas em conversão.",
+            "areaServed": ["BR", "US", "PT", "GB"],
+            "availableLanguage": ["pt-BR", "en"],
+            "priceRange": "R$790-R$2190 / USD590-USD1890",
+            "sameAs": ["https://www.linkedin.com/in/florianiigor"],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "telephone": "+55-47-98405-4897",
+                "email": "igorfloriani.p@gmail.com",
+                "availableLanguage": ["pt-BR", "en"]
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.igorfloriani.com/#website",
+            "url": "https://www.igorfloriani.com/",
+            "name": "Igor Floriani | Portfólio de Landing Pages",
+            "inLanguage": "pt-BR"
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Qual o prazo de entrega?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Normalmente entre 5 e 10 dias úteis, dependendo do escopo e materiais enviados."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quantas revisões estão inclusas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Até 2 rodadas de ajustes para garantir alinhamento com seu objetivo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Você publica a landing para mim?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim, posso deixar sua página pronta para publicação e orientar domínio e hospedagem."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Posso pagar em etapas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. Em geral funciona com sinal para início e restante na entrega."
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Robots meta -->
     <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="icon" type="image/x-icon" href="./favicon.ico?v=2" />
     <link rel="shortcut icon" href="./favicon.ico?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2" />
@@ -447,7 +529,7 @@
       <article class="card">
         <a class="card__link" target="_blank" rel="noopener noreferrer">
           <div class="card__preview-wrap">
-            <img class="card__preview" alt="" loading="lazy" />
+            <img class="card__preview" alt="" loading="lazy" decoding="async" width="1280" height="720" />
           </div>
           <div class="card__content">
             <h2 class="card__title"></h2>
