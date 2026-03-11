@@ -98,15 +98,28 @@ body::after {
   z-index: -1;
   background: url("assets/referencia.webp") center / cover no-repeat;
   opacity: 0.13;
-  filter: blur(16px) saturate(130%);
+  filter: blur(10px) saturate(120%);
 }
 
 .bg-shape {
   position: fixed;
   z-index: -1;
   border-radius: 999px;
-  filter: blur(22px);
+  filter: blur(14px);
   opacity: 0.5;
+}
+
+.about,
+.process,
+.offer,
+.projects-section,
+.plans,
+.testimonials,
+.faq,
+.lead-form,
+.contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }
 
 .bg-shape--one {
@@ -871,6 +884,12 @@ body::after {
 }
 
 @media (max-width: 980px) {
+  body::before,
+  body::after,
+  .bg-shape {
+    display: none;
+  }
+
   .projects.projects--three {
     grid-template-columns: repeat(2, minmax(260px, 420px));
   }

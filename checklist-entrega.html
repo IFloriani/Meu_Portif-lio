@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist de Entrega — Igor Floriani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Orbitron:wght@500;700;800&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0:     #090c1c;
+      --bg-1:     #0e1228;
+      --bg-card:  #111728;
+      --accent:   #6ff0ff;
+      --accent-2: #8f7bff;
+      --text:     #e4eaf6;
+      --muted:    #7a8aaa;
+      --border:   rgba(111,240,255,.18);
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background: var(--bg-0);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-name {
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .header-meta strong { color: var(--text); }
+
+    /* ── Title ── */
+    .page-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+      letter-spacing: .04em;
+    }
+
+    .page-subtitle {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    /* ── Section ── */
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Orbitron", sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 18px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent-2);
+      border-radius: 2px;
+    }
+
+    /* ── Checklist items ── */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .9rem;
+      line-height: 1.5;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checklist li .box {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, border-color .15s;
+    }
+
+    .checklist li .box svg {
+      display: none;
+      width: 11px;
+      height: 11px;
+    }
+
+    .checklist li.done .box {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checklist li.done .box svg { display: block; }
+
+    .checklist li.done .label {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      margin-top: 36px;
+      margin-bottom: 8px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-info span:last-child { color: var(--accent); font-weight: 700; }
+
+    .progress-bar-bg {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 999px;
+      transition: width .4s ease;
+      width: 0%;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Print ── */
+    @media print {
+      body { background: #fff; color: #111; padding: 24px; }
+      .section { border: 1px solid #ddd; break-inside: avoid; }
+      .checklist li .box { border-color: #555; }
+      .logo-name { -webkit-text-fill-color: #111; }
+      .progress-wrap { display: none; }
+      .footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <header class="header">
+      <div class="logo-name">Igor Floriani</div>
+      <div class="header-meta">
+        <strong>Checklist de Entrega</strong><br />
+        Landing Page — Projeto do Cliente<br />
+        <span id="today-date"></span>
+      </div>
+    </header>
+
+    <h1 class="page-title">Checklist de Entrega</h1>
+    <p class="page-subtitle">Marque cada etapa conforme for concluída. O progresso é salvo automaticamente no seu navegador.</p>
+
+    <!-- Seção 1 -->
+    <section class="section">
+      <div class="section-title">Antes de começar</div>
+      <ul class="checklist">
+        <li data-id="1"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente criou a conta no Google Analytics e forneceu o ID (G-...)</span></li>
+        <li data-id="2"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Domínio registrado e DNS acessível</span></li>
+        <li data-id="3"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Briefing preenchido: nicho, público, objetivo, CTA principal</span></li>
+        <li data-id="4"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Textos, logo e imagens recebidos do cliente</span></li>
+      </ul>
+    </section>
+
+    <!-- Seção 2 -->
+    <section class="section">
+      <div class="section-title">Durante o desenvolvimento</div>
+      <ul class="checklist">
+        <li data-id="5"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Código GA4 inserido com o ID do cliente</span></li>
+        <li data-id="6"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Eventos de rastreamento configurados (CTA, formulário, WhatsApp)</span></li>
+        <li data-id="7"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Versão mobile testada (320px, 375px, 768px)</span></li>
+        <li data-id="8"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Velocidade verificada no Google PageSpeed Insights</span></li>
+        <li data-id="9"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Meta tags configuradas: title, description, og:image, canonical</span></li>
+        <li data-id="10"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">robots.txt e sitemap.xml criados</span></li>
+      </ul>
+    </section>
+
+    <!-- Seção 3 -->
+    <section class="section">
+      <div class="section-title">Na entrega</div>
+      <ul class="checklist">
+        <li data-id="11"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Deploy feito e URL de produção funcionando</span></li>
+        <li data-id="12"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Cliente verificou o domínio no Google Search Console</span></li>
+        <li data-id="13"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Sitemap enviado no Search Console (/sitemap.xml)</span></li>
+        <li data-id="14"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">GA4 testado em Tempo Real (evento aparece ao acessar a página)</span></li>
+        <li data-id="15"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Formulário / WhatsApp testado: mensagem chega corretamente</span></li>
+        <li data-id="16"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Acesso de Editor no GA4 configurado (se incluso no pacote)</span></li>
+      </ul>
+    </section>
+
+    <!-- Seção 4 -->
+    <section class="section">
+      <div class="section-title">Documentação entregue ao cliente</div>
+      <ul class="checklist">
+        <li data-id="17"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">URL de produção enviada ao cliente</span></li>
+        <li data-id="18"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Acesso ao repositório entregue (se incluído no pacote)</span></li>
+        <li data-id="19"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Instruções básicas de uso / alteração de textos enviadas</span></li>
+        <li data-id="20"><span class="box"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="#090c1c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Prazo de garantia e contato de suporte esclarecidos</span></li>
+      </ul>
+    </section>
+
+    <!-- Barra de progresso -->
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span>Progresso geral</span>
+        <span id="progress-label">0 / 20 concluídos</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Igor Floriani · <a href="https://www.igorfloriani.com" target="_blank" rel="noopener">igorfloriani.com</a> · <a href="https://www.linkedin.com/in/florianiigor" target="_blank" rel="noopener">LinkedIn</a></p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Data de hoje
+    document.getElementById("today-date").textContent =
+      new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+
+    const STORAGE_KEY = "checklist_entrega_v1";
+    const total = document.querySelectorAll(".checklist li").length;
+
+    function save(done) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
+    }
+
+    function load() {
+      try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")); }
+      catch { return new Set(); }
+    }
+
+    function updateProgress(done) {
+      const count = done.size;
+      document.getElementById("progress-label").textContent = `${count} / ${total} concluídos`;
+      document.getElementById("progress-fill").style.width = `${(count / total) * 100}%`;
+    }
+
+    const done = load();
+
+    document.querySelectorAll(".checklist li").forEach(li => {
+      const id = li.dataset.id;
+      if (done.has(id)) li.classList.add("done");
+
+      li.addEventListener("click", () => {
+        if (done.has(id)) { done.delete(id); li.classList.remove("done"); }
+        else { done.add(id); li.classList.add("done"); }
+        save(done);
+        updateProgress(done);
+      });
+    });
+
+    updateProgress(done);
+  </script>
+</body>
+</html>
