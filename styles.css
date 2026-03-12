@@ -1098,50 +1098,16 @@ body::after {
   justify-self: end;
 }
 
-.plans__service-pricing {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.plans__service-item {
-  grid-column: span 4;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(111, 240, 255, 0.24);
-  background:
-    linear-gradient(150deg, rgba(111, 240, 255, 0.08), transparent 48%),
-    rgba(7, 16, 40, 0.72);
-}
-
-.plans__service-label {
-  margin: 0;
-  color: #d6e3fb;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.plans__service-value {
-  margin: 6px 0 0;
-  color: #f0f6ff;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1.45;
-}
-
-.plans__service-value span {
-  color: #6ff0ff;
-}
-
 .plans__grid,
 .testimonials__grid {
   margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 14px;
+}
+
+.plans__grid .plan-card {
+  grid-column: span 3;
 }
 
 .plan-card,
@@ -1244,6 +1210,19 @@ body::after {
     linear-gradient(150deg, rgba(58, 95, 212, 0.22), transparent 45%),
     rgba(8, 16, 40, 0.98);
   box-shadow: 0 0 0 1px rgba(58, 95, 212, 0.1), 0 16px 30px rgba(7, 16, 44, 0.42);
+}
+
+.plan-card--institutional {
+  padding: 19px;
+  border-color: rgba(111, 240, 255, 0.48);
+  background:
+    linear-gradient(150deg, rgba(111, 240, 255, 0.12), transparent 45%),
+    rgba(8, 16, 40, 0.98);
+  box-shadow: 0 0 0 1px rgba(111, 240, 255, 0.08), 0 16px 30px rgba(7, 16, 44, 0.34);
+}
+
+.plan-card--institutional .action-btn {
+  width: 100%;
 }
 
 .plan-card--premium ul {
@@ -1840,10 +1819,6 @@ body::after {
     grid-column: auto;
   }
 
-  .plans__service-item {
-    grid-column: span 6;
-  }
-
   .pain,
   .about,
   .process,
@@ -1870,6 +1845,10 @@ body::after {
   .projects-section__intro,
   .projects-section__spotlight,
   .projects-section__stat {
+    grid-column: span 6;
+  }
+
+  .plans__grid .plan-card {
     grid-column: span 6;
   }
 
@@ -1984,8 +1963,7 @@ body::after {
 
   .projects-section__header,
   .projects-section__stats,
-  .plans__header,
-  .plans__service-pricing {
+  .plans__header {
     grid-template-columns: 1fr;
   }
 
@@ -2065,6 +2043,10 @@ body::after {
   .projects.projects--two,
   .projects.projects--three {
     grid-template-columns: 1fr;
+  }
+
+  .plans__grid .plan-card {
+    grid-column: auto;
   }
 
   .plan-card--featured {
