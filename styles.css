@@ -111,7 +111,9 @@ body::after {
 }
 
 .about,
+.pain,
 .process,
+.why-me,
 .offer,
 .projects-section,
 .plans,
@@ -371,6 +373,136 @@ body::after {
 }
 
 .about__item p {
+  margin: 9px 0 0;
+  color: #c2cce5;
+  line-height: 1.6;
+  font-size: 0.93rem;
+}
+
+.pain {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8px 20px 36px;
+}
+
+.pain__tag {
+  margin: 0;
+  color: var(--accent-2);
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.pain h2 {
+  margin: 10px 0 8px;
+  max-width: 26ch;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.pain__grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.pain__item {
+  grid-column: span 4;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(143, 123, 255, 0.3);
+  background:
+    linear-gradient(145deg, rgba(143, 123, 255, 0.08), transparent 40%),
+    rgba(10, 18, 45, 0.66);
+}
+
+.pain__icon {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  line-height: 1;
+  display: block;
+}
+
+.pain__item h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Orbitron", sans-serif;
+}
+
+.pain__item p {
+  margin: 9px 0 0;
+  color: #c2cce5;
+  line-height: 1.6;
+  font-size: 0.93rem;
+}
+
+.pain__bridge {
+  margin: 24px 0 0;
+  color: var(--accent-2);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.why-me {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8px 20px 36px;
+}
+
+.why-me__tag {
+  margin: 0;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.why-me h2 {
+  margin: 10px 0 8px;
+  max-width: 22ch;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.why-me__grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.why-me__item {
+  grid-column: span 4;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(111, 240, 255, 0.3);
+  background:
+    linear-gradient(145deg, rgba(111, 240, 255, 0.08), transparent 40%),
+    rgba(10, 18, 45, 0.66);
+}
+
+.why-me__num {
+  margin: 0 0 8px;
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-family: "Orbitron", sans-serif;
+}
+
+.why-me__item h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Orbitron", sans-serif;
+}
+
+.why-me__item p {
   margin: 9px 0 0;
   color: #c2cce5;
   line-height: 1.6;
@@ -1012,7 +1144,9 @@ body::after {
 
   .process__item,
   .highlight-card,
-  .about__item {
+  .about__item,
+  .pain__item,
+  .why-me__item {
     grid-column: span 6;
   }
 
@@ -1127,7 +1261,9 @@ body::after {
   .testimonials__grid,
   .process__grid,
   .process__highlights,
-  .about__grid {
+  .about__grid,
+  .pain__grid,
+  .why-me__grid {
     grid-template-columns: 1fr;
   }
 
@@ -1152,11 +1288,15 @@ body::after {
   .process__grid,
   .process__highlights,
   .about__grid,
+  .pain__grid,
+  .why-me__grid,
   .process__item,
   .plan-card,
   .testimonial-card,
   .highlight-card,
-  .about__item {
+  .about__item,
+  .pain__item,
+  .why-me__item {
     grid-column: auto;
   }
 
