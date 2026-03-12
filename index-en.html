@@ -178,49 +178,53 @@
     <div class="bg-shape bg-shape--two" aria-hidden="true"></div>
 
     <header class="hero">
-      <div class="hero__top">
-        <p class="hero__tag">Portfolio</p>
-        <nav class="language-switch" aria-label="Language switcher">
-          <a class="language-switch__link" data-lang="pt" href="index.html">PT</a>
-          <a class="language-switch__link language-switch__link--active" data-lang="en" href="index-en.html">EN</a>
-        </nav>
+      <div class="hero__layout">
+        <div class="hero__content">
+          <div class="hero__top">
+            <p class="hero__tag">Portfolio</p>
+            <nav class="language-switch" aria-label="Language switcher">
+              <a class="language-switch__link" data-lang="pt" href="index.html">PT</a>
+              <a class="language-switch__link language-switch__link--active" data-lang="en" href="index-en.html">EN</a>
+            </nav>
+          </div>
+          <h1>High-converting landing pages for lead generation and sales</h1>
+          <p class="hero__subtitle">
+            Your campaign deserves a page that converts. I build strategic, fast landing pages ready to
+            generate leads — delivered in up to 10 business days, with direct support at every stage.
+          </p>
+          <div class="hero__actions">
+            <a
+              class="action-btn action-btn--primary"
+              data-track="hero_whatsapp_cta"
+              href="https://wa.me/5547984054897?text=Hi%20Igor%2C%20I%20saw%20your%20portfolio%20and%20I%20would%20like%20a%20quote%20for%20my%20landing%20page."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Schedule free diagnosis
+            </a>
+            <a
+              class="action-btn"
+              data-track="hero_linkedin_cta"
+              href="https://www.linkedin.com/in/florianiigor"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View LinkedIn
+            </a>
+          </div>
+          <div class="trust-badges" aria-label="Service highlights">
+            <span>Direct support with the developer</span>
+            <span>Delivery in 5 to 10 business days</span>
+            <span>Post-launch support</span>
+          </div>
+          <nav class="hero__quick-nav" aria-label="Quick navigation">
+            <a class="hero__quick-link" data-track="hero_process_nav" href="#process">Process</a>
+            <a class="hero__quick-link" data-track="hero_projects_nav" href="#projects">Projects</a>
+            <a class="hero__quick-link" data-track="hero_plans_nav" href="#plans">Packages</a>
+            <a class="hero__quick-link hero__quick-link--priority" data-track="hero_contact_nav" href="#contact">Contact</a>
+          </nav>
+        </div>
       </div>
-      <h1>High-converting landing pages for lead generation and sales</h1>
-      <p class="hero__subtitle">
-        Your campaign deserves a page that converts. I build strategic, fast landing pages ready to
-        generate leads — delivered in up to 10 business days, with direct support at every stage.
-      </p>
-      <div class="hero__actions">
-        <a
-          class="action-btn action-btn--primary"
-          data-track="hero_whatsapp_cta"
-          href="https://wa.me/5547984054897?text=Hi%20Igor%2C%20I%20saw%20your%20portfolio%20and%20I%20would%20like%20a%20quote%20for%20my%20landing%20page."
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Schedule free diagnosis
-        </a>
-        <a
-          class="action-btn"
-          data-track="hero_linkedin_cta"
-          href="https://www.linkedin.com/in/florianiigor"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View LinkedIn
-        </a>
-      </div>
-      <div class="trust-badges" aria-label="Service highlights">
-        <span>Direct support with the developer</span>
-        <span>Delivery in 5 to 10 business days</span>
-        <span>Post-launch support</span>
-      </div>
-      <nav class="hero__quick-nav" aria-label="Quick navigation">
-        <a class="hero__quick-link" data-track="hero_process_nav" href="#process">Process</a>
-        <a class="hero__quick-link" data-track="hero_projects_nav" href="#projects">Projects</a>
-        <a class="hero__quick-link" data-track="hero_plans_nav" href="#plans">Packages</a>
-        <a class="hero__quick-link" data-track="hero_contact_nav" href="#contact">Contact</a>
-      </nav>
       <div class="hero__insights" aria-label="Delivery strengths">
         <article class="hero__insight">
           <h2>Clearer offer structure</h2>
@@ -473,15 +477,19 @@
       </section>
 
       <section class="plans" id="plans" aria-label="Service packages">
-        <p class="plans__tag">Packages</p>
-        <h2>Choose the right format for your current stage.</h2>
-        <p class="plans__note">
-          Packages are organized into three levels: presence, measurement, and premium operation.
-          Each revision round includes a single batch of changes. After included rounds, extra
-          requests are billed separately per technical hour. Standard page hosting is included.
-          Custom domain is purchased separately according to your provider. Displayed currency is
-          automatically locked based on visitor region.
-        </p>
+        <div class="plans__header">
+          <div class="plans__intro">
+            <p class="plans__tag">Packages</p>
+            <h2>Choose the right format for your current stage.</h2>
+          </div>
+          <p class="plans__note">
+            Packages are organized into three levels: presence, measurement, and premium operation.
+            Each revision round includes a single batch of changes. After included rounds, extra
+            requests are billed separately per technical hour. Standard page hosting is included.
+            Custom domain is purchased separately according to your provider. Displayed currency is
+            automatically locked based on visitor region.
+          </p>
+        </div>
         <div class="plans__grid">
           <article class="plan-card">
             <p class="plan-card__badge">Essential</p>
@@ -549,7 +557,7 @@
               href="https://wa.me/5547984054897?text=Hi%20Igor%2C%20I%20want%20to%20schedule%20a%20free%20diagnosis%20for%20the%20Campaign%20Scale%20package."
               target="_blank"
               rel="noopener noreferrer"
-              >Schedule free diagnosis</a
+              >Schedule premium diagnosis</a
             >
           </article>
         </div>

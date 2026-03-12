@@ -191,49 +191,53 @@
     <div class="bg-shape bg-shape--two" aria-hidden="true"></div>
 
     <header class="hero">
-      <div class="hero__top">
-        <p class="hero__tag">Portfólio</p>
-        <nav class="language-switch" aria-label="Seletor de idioma">
-          <a class="language-switch__link language-switch__link--active" data-lang="pt" href="index.html">PT</a>
-          <a class="language-switch__link" data-lang="en" href="index-en.html">EN</a>
-        </nav>
+      <div class="hero__layout">
+        <div class="hero__content">
+          <div class="hero__top">
+            <p class="hero__tag">Portfólio</p>
+            <nav class="language-switch" aria-label="Seletor de idioma">
+              <a class="language-switch__link language-switch__link--active" data-lang="pt" href="index.html">PT</a>
+              <a class="language-switch__link" data-lang="en" href="index-en.html">EN</a>
+            </nav>
+          </div>
+          <h1>Landing pages de alta conversão para gerar leads e vendas</h1>
+          <p class="hero__subtitle">
+            Sua campanha merece uma página que converte. Desenvolvo landing pages estratégicas, rápidas
+            e com foco em resultado — entregues em até 10 dias úteis, com suporte direto em cada etapa.
+          </p>
+          <div class="hero__actions">
+            <a
+              class="action-btn action-btn--primary"
+              data-track="hero_whatsapp_cta"
+              href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento%20para%20minha%20landing%20page."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Agendar diagnostico gratuito
+            </a>
+            <a
+              class="action-btn"
+              data-track="hero_linkedin_cta"
+              href="https://www.linkedin.com/in/florianiigor"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver LinkedIn
+            </a>
+          </div>
+          <div class="trust-badges" aria-label="Diferenciais de atendimento">
+            <span>Atendimento direto com desenvolvedor</span>
+            <span>Entrega em 5 a 10 dias úteis</span>
+            <span>Suporte pós-entrega</span>
+          </div>
+          <nav class="hero__quick-nav" aria-label="Acessos rápidos">
+            <a class="hero__quick-link" data-track="hero_process_nav" href="#processo">Processo</a>
+            <a class="hero__quick-link" data-track="hero_projects_nav" href="#projects">Projetos</a>
+            <a class="hero__quick-link" data-track="hero_plans_nav" href="#planos">Pacotes</a>
+            <a class="hero__quick-link hero__quick-link--priority" data-track="hero_contact_nav" href="#contato">Contato</a>
+          </nav>
+        </div>
       </div>
-      <h1>Landing pages de alta conversão para gerar leads e vendas</h1>
-      <p class="hero__subtitle">
-        Sua campanha merece uma página que converte. Desenvolvo landing pages estratégicas, rápidas
-        e com foco em resultado — entregues em até 10 dias úteis, com suporte direto em cada etapa.
-      </p>
-      <div class="hero__actions">
-        <a
-          class="action-btn action-btn--primary"
-          data-track="hero_whatsapp_cta"
-          href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20vi%20seu%20portf%C3%B3lio%20e%20quero%20um%20or%C3%A7amento%20para%20minha%20landing%20page."
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Agendar diagnostico gratuito
-        </a>
-        <a
-          class="action-btn"
-          data-track="hero_linkedin_cta"
-          href="https://www.linkedin.com/in/florianiigor"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Ver LinkedIn
-        </a>
-      </div>
-      <div class="trust-badges" aria-label="Diferenciais de atendimento">
-        <span>Atendimento direto com desenvolvedor</span>
-        <span>Entrega em 5 a 10 dias úteis</span>
-        <span>Suporte pós-entrega</span>
-      </div>
-      <nav class="hero__quick-nav" aria-label="Acessos rápidos">
-        <a class="hero__quick-link" data-track="hero_process_nav" href="#processo">Processo</a>
-        <a class="hero__quick-link" data-track="hero_projects_nav" href="#projects">Projetos</a>
-        <a class="hero__quick-link" data-track="hero_plans_nav" href="#planos">Pacotes</a>
-        <a class="hero__quick-link" data-track="hero_contact_nav" href="#contato">Contato</a>
-      </nav>
       <div class="hero__insights" aria-label="Pontos fortes da entrega">
         <article class="hero__insight">
           <h2>Oferta mais clara</h2>
@@ -484,15 +488,19 @@
       </section>
 
       <section class="plans" id="planos" aria-label="Pacotes de serviço" lang="pt-BR">
-        <p class="plans__tag">Pacotes</p>
-        <h2>Escolha o formato ideal para o seu momento.</h2>
-        <p class="plans__note">
-          Os pacotes foram organizados em três níveis: presença, medição e operação premium. Cada
-          rodada de ajustes considera um lote único de alterações. Após as rodadas inclusas, novas
-          demandas são cobradas à parte por hora técnica. A hospedagem padrão da página já está
-          inclusa. O domínio personalizado é contratado à parte, conforme o valor do provedor. A
-          moeda exibida é definida automaticamente pela região de acesso.
-        </p>
+        <div class="plans__header">
+          <div class="plans__intro">
+            <p class="plans__tag">Pacotes</p>
+            <h2>Escolha o formato ideal para o seu momento.</h2>
+          </div>
+          <p class="plans__note">
+            Os pacotes foram organizados em três níveis: presença, medição e operação premium. Cada
+            rodada de ajustes considera um lote único de alterações. Após as rodadas inclusas, novas
+            demandas são cobradas à parte por hora técnica. A hospedagem padrão da página já está
+            inclusa. O domínio personalizado é contratado à parte, conforme o valor do provedor. A
+            moeda exibida é definida automaticamente pela região de acesso.
+          </p>
+        </div>
         <div class="plans__grid">
           <article class="plan-card">
             <p class="plan-card__badge">Essencial</p>
@@ -560,7 +568,7 @@
               href="https://wa.me/5547984054897?text=Ol%C3%A1%20Igor%2C%20quero%20agendar%20um%20diagn%C3%B3stico%20gratuito%20para%20o%20pacote%20Escala%20de%20Campanhas."
               target="_blank"
               rel="noopener noreferrer"
-              >Agendar diagnostico gratuito</a
+              >Agendar diagnostico premium</a
             >
           </article>
         </div>
