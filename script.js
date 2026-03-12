@@ -133,6 +133,55 @@ document.querySelectorAll(".language-switch__link[data-lang]").forEach((link) =>
   });
 });
 
+document.querySelectorAll('a[href*="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const rawHref = link.getAttribute("href");
+    if (!rawHref || rawHref === "#") {
+      return;
+    }
+
+    let targetUrl;
+    try {
+      targetUrl = new URL(rawHref, window.location.href);
+    } catch (error) {
+      return;
+    }
+
+    const isSamePage =
+      targetUrl.origin === window.location.origin &&
+      targetUrl.pathname === window.location.pathname;
+
+    if (!isSamePage || !targetUrl.hash) {
+      return;
+    }
+
+    const targetSelector = targetUrl.hash;
+
+    const target = document.querySelector(targetSelector);
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth";
+
+    // Wait one frame to avoid early-scroll race while first layout is settling.
+    requestAnimationFrame(() => {
+      target.scrollIntoView({
+        behavior,
+        block: "start"
+      });
+
+      if (history.replaceState) {
+        history.replaceState(null, "", targetSelector);
+      }
+    });
+  });
+});
+
 function pickCopy(copy) {
   if (typeof copy === "string") return copy;
   return isEnglish ? copy.en : copy.pt;
@@ -356,7 +405,7 @@ document.querySelectorAll("[data-track]").forEach((element) => {
 });
 
 const revealTargets = document.querySelectorAll(
-  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .projects-section__spotlight, .projects-section__stat, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
+  ".projects-section__spotlight, .projects-section__stat, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
 );
 
 function applyReveal(selector, stagger = 0, startDelay = 0) {
@@ -369,9 +418,6 @@ function applyReveal(selector, stagger = 0, startDelay = 0) {
   });
 }
 
-applyReveal(
-  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact"
-);
 applyReveal(".projects-section__spotlight, .projects-section__stat", 80, 40);
 applyReveal(".pain__item, .about__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item", 70, 40);
 applyReveal(".highlight-card, .plan-card, .testimonial-card, .card", 90, 60);
