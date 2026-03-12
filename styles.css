@@ -1119,6 +1119,9 @@ body::after {
 .plan-card {
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
@@ -1175,7 +1178,16 @@ body::after {
   line-height: 1.5;
 }
 
+.plan-card li + li {
+  margin-top: 8px;
+}
+
+.plan-card .action-btn {
+  margin-top: auto;
+}
+
 .plan-card--featured {
+  padding: 18px;
   border-color: rgba(159, 140, 255, 0.65);
   background:
     linear-gradient(150deg, rgba(159, 140, 255, 0.32), transparent 45%),
@@ -1183,12 +1195,27 @@ body::after {
   color: #fff;
 }
 
+.plan-card--featured li + li {
+  margin-top: 10px;
+}
+
 .plan-card--premium {
+  padding: 20px;
   border-color: rgba(58, 95, 212, 0.62);
   background:
     linear-gradient(150deg, rgba(58, 95, 212, 0.22), transparent 45%),
     rgba(8, 16, 40, 0.98);
   box-shadow: 0 0 0 1px rgba(58, 95, 212, 0.1), 0 16px 30px rgba(7, 16, 44, 0.42);
+}
+
+.plan-card--premium ul {
+  line-height: 1.58;
+}
+
+.plan-card--premium li + li {
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(123, 161, 255, 0.22);
 }
 
 .plan-card__badge {
@@ -1995,6 +2022,23 @@ body::after {
   .projects.projects--two,
   .projects.projects--three {
     grid-template-columns: 1fr;
+  }
+
+  .plan-card--featured {
+    padding: 17px;
+  }
+
+  .plan-card--premium {
+    padding: 18px;
+  }
+
+  .plan-card--featured li + li,
+  .plan-card--premium li + li {
+    margin-top: 9px;
+  }
+
+  .plan-card--premium li + li {
+    padding-top: 8px;
   }
 
   .projects-section {
