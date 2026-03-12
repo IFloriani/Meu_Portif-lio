@@ -114,7 +114,9 @@ body::after {
 .pain,
 .process,
 .why-me,
+.service-scope,
 .offer,
+.outcomes,
 .projects-section,
 .plans,
 .testimonials,
@@ -509,6 +511,52 @@ body::after {
   font-size: 0.93rem;
 }
 
+.service-scope,
+.outcomes {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8px 20px 34px;
+}
+
+.service-scope__grid,
+.outcomes__grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.service-scope__item,
+.outcomes__item {
+  grid-column: span 4;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(111, 240, 255, 0.3);
+  background:
+    linear-gradient(145deg, rgba(111, 240, 255, 0.08), transparent 40%),
+    rgba(10, 18, 45, 0.66);
+}
+
+.service-scope__item h3,
+.outcomes__item h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Orbitron", sans-serif;
+}
+
+.service-scope__item p,
+.outcomes__item p {
+  margin: 9px 0 0;
+  color: #c2cce5;
+  line-height: 1.6;
+  font-size: 0.93rem;
+}
+
+.service-scope__cta,
+.outcomes__cta {
+  margin-top: 20px;
+}
+
 .process {
   max-width: 1120px;
   margin: 0 auto;
@@ -535,6 +583,8 @@ body::after {
     rgba(7, 15, 40, 0.78);
 }
 
+.service-scope__tag,
+.outcomes__tag,
 .offer__tag,
 .plans__tag,
 .testimonials__tag,
@@ -548,6 +598,8 @@ body::after {
   font-weight: 700;
 }
 
+.service-scope h2,
+.outcomes h2,
 .offer h2,
 .plans h2,
 .testimonials h2,
@@ -558,6 +610,8 @@ body::after {
   font-size: clamp(1.2rem, 2.8vw, 1.9rem);
 }
 
+.service-scope > p,
+.outcomes > p,
 .offer p,
 .plans p,
 .testimonials p,
@@ -1146,6 +1200,8 @@ body::after {
   .highlight-card,
   .about__item,
   .pain__item,
+  .service-scope__item,
+  .outcomes__item,
   .why-me__item {
     grid-column: span 6;
   }
@@ -1263,6 +1319,8 @@ body::after {
   .process__highlights,
   .about__grid,
   .pain__grid,
+  .service-scope__grid,
+  .outcomes__grid,
   .why-me__grid {
     grid-template-columns: 1fr;
   }
@@ -1289,6 +1347,8 @@ body::after {
   .process__highlights,
   .about__grid,
   .pain__grid,
+  .service-scope__grid,
+  .outcomes__grid,
   .why-me__grid,
   .process__item,
   .plan-card,
@@ -1296,6 +1356,8 @@ body::after {
   .highlight-card,
   .about__item,
   .pain__item,
+  .service-scope__item,
+  .outcomes__item,
   .why-me__item {
     grid-column: auto;
   }
