@@ -537,6 +537,84 @@ body::after {
   max-width: 62ch;
 }
 
+.projects-section__header {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.projects-section__intro {
+  grid-column: span 7;
+}
+
+.projects-section__spotlight {
+  grid-column: span 5;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(111, 240, 255, 0.24);
+  background:
+    linear-gradient(150deg, rgba(111, 240, 255, 0.08), transparent 45%),
+    rgba(8, 16, 40, 0.74);
+  box-shadow: 0 18px 34px rgba(4, 9, 28, 0.24);
+}
+
+.projects-section__spotlight-tag {
+  margin: 0;
+  color: #9f8cff;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.projects-section__spotlight p {
+  margin: 10px 0 0;
+  color: #d1dbef;
+  line-height: 1.65;
+}
+
+.projects-section__spotlight-list {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: #dbe5f8;
+  line-height: 1.55;
+}
+
+.projects-section__spotlight-list li + li {
+  margin-top: 6px;
+}
+
+.projects-section__stats {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.projects-section__stat {
+  grid-column: span 4;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(111, 240, 255, 0.22);
+  background: rgba(7, 15, 38, 0.62);
+}
+
+.projects-section__stat strong {
+  display: block;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.15rem;
+  color: #f3f7ff;
+}
+
+.projects-section__stat span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
 .about {
   max-width: 1120px;
   margin: 0 auto;
@@ -566,8 +644,6 @@ body::after {
   color: var(--muted);
   line-height: 1.7;
 }
-
-.about__grid {
 
 .pain,
 .about,
@@ -603,6 +679,8 @@ body::after {
   background: linear-gradient(90deg, transparent, rgba(111, 240, 255, 0.22), rgba(143, 123, 255, 0.18), transparent);
   opacity: 0.9;
 }
+
+.about__grid {
   margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1275,6 +1353,38 @@ body::after {
   background: rgba(4, 9, 28, 0.65);
   padding: 8px;
   transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+  position: relative;
+}
+
+.card__badges {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 240, 255, 0.3);
+  background: rgba(6, 14, 35, 0.82);
+  color: #edf5ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.card__badge--status {
+  border-color: rgba(111, 240, 255, 0.56);
+  color: #071125;
+  background: linear-gradient(135deg, #6ff0ff, #9f8cff);
 }
 
 .card__preview {
@@ -1299,6 +1409,25 @@ body::after {
   font-size: 1.05rem;
   font-family: "Orbitron", sans-serif;
   letter-spacing: 0.04em;
+}
+
+.card__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.card__fact {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 240, 255, 0.18);
+  background: rgba(11, 23, 56, 0.58);
+  color: #d9e5fb;
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
 .card__description {
@@ -1522,6 +1651,12 @@ body::after {
     grid-column: span 6;
   }
 
+  .projects-section__intro,
+  .projects-section__spotlight,
+  .projects-section__stat {
+    grid-column: span 6;
+  }
+
   .process__item,
   .highlight-card,
   .about__item,
@@ -1607,6 +1742,27 @@ body::after {
 
   .hero__insight {
     grid-column: auto;
+  }
+
+  .projects-section__header,
+  .projects-section__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-section__intro,
+  .projects-section__spotlight,
+  .projects-section__stat {
+    grid-column: auto;
+  }
+
+  .card__facts,
+  .card__badges {
+    gap: 6px;
+  }
+
+  .card__badges {
+    top: 12px;
+    left: 12px;
   }
 
   .projects {

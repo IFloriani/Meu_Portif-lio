@@ -166,6 +166,28 @@ const projects = [
     },
     image: "assets/glow-preview.png",
     url: "https://lashdesing.netlify.app/",
+    meta: {
+      status: {
+        pt: "Case ao vivo",
+        en: "Live case"
+      },
+      type: {
+        pt: "Landing page",
+        en: "Landing page"
+      },
+      niche: {
+        pt: "Nicho: estetica e beleza",
+        en: "Niche: beauty"
+      },
+      format: {
+        pt: "Formato: pagina unica",
+        en: "Format: single page"
+      },
+      focus: {
+        pt: "Foco: agendamento via WhatsApp",
+        en: "Focus: WhatsApp bookings"
+      }
+    },
     caseStudy: {
       goal: {
         pt: "Atrair novos agendamentos de serviços de beleza",
@@ -191,6 +213,10 @@ const projects = [
 const projectsContainer = document.getElementById("projects");
 const cardTemplate = document.getElementById("project-card-template");
 
+document.querySelectorAll("[data-project-count]").forEach((node) => {
+  node.textContent = String(projects.length);
+});
+
 if (projects.length === 1) {
   projectsContainer.classList.add("projects--single");
 }
@@ -210,6 +236,11 @@ function createCard(project) {
   const link = cardNode.querySelector(".card__link");
   const image = cardNode.querySelector(".card__preview");
   const title = cardNode.querySelector(".card__title");
+  const status = cardNode.querySelector(".card__status");
+  const type = cardNode.querySelector(".card__type");
+  const niche = cardNode.querySelector(".card__niche");
+  const format = cardNode.querySelector(".card__format");
+  const focus = cardNode.querySelector(".card__focus");
   const description = cardNode.querySelector(".card__description");
   const goal = cardNode.querySelector(".card__goal");
   const solution = cardNode.querySelector(".card__solution");
@@ -237,6 +268,13 @@ function createCard(project) {
   });
 
   title.textContent = titleText;
+  if (project.meta) {
+    status.textContent = pickCopy(project.meta.status);
+    type.textContent = pickCopy(project.meta.type);
+    niche.textContent = pickCopy(project.meta.niche);
+    format.textContent = pickCopy(project.meta.format);
+    focus.textContent = pickCopy(project.meta.focus);
+  }
   description.textContent = descriptionText;
 
   if (project.caseStudy) {
@@ -318,7 +356,7 @@ document.querySelectorAll("[data-track]").forEach((element) => {
 });
 
 const revealTargets = document.querySelectorAll(
-  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
+  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .projects-section__spotlight, .projects-section__stat, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
 );
 
 function applyReveal(selector, stagger = 0, startDelay = 0) {
@@ -334,6 +372,7 @@ function applyReveal(selector, stagger = 0, startDelay = 0) {
 applyReveal(
   ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact"
 );
+applyReveal(".projects-section__spotlight, .projects-section__stat", 80, 40);
 applyReveal(".pain__item, .about__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item", 70, 40);
 applyReveal(".highlight-card, .plan-card, .testimonial-card, .card", 90, 60);
 

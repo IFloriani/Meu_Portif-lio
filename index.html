@@ -444,11 +444,42 @@
       </section>
 
       <section class="projects-section" aria-label="Projetos publicados" lang="pt-BR">
-        <p class="projects-section__tag">Projetos</p>
-        <h2>Landing pages publicadas</h2>
-        <p class="projects-section__subtitle">
-          Cada card abaixo abre a versão real da landing page em uma nova aba.
-        </p>
+        <div class="projects-section__header">
+          <div class="projects-section__intro">
+            <p class="projects-section__tag">Projetos</p>
+            <h2>Case em destaque, com contexto real de negocio.</h2>
+            <p class="projects-section__subtitle">
+              Em vez de mostrar so uma galeria, apresento o projeto com objetivo, canal principal e
+              decisoes de estrutura. Cada card abaixo abre a landing real em uma nova aba.
+            </p>
+          </div>
+          <aside class="projects-section__spotlight" aria-label="Contexto do portfólio">
+            <p class="projects-section__spotlight-tag">Portfólio em expansão</p>
+            <p>
+              Novos cases entram conforme autorização dos clientes. Enquanto isso, cada projeto
+              publicado recebe mais contexto visual e estratégico para mostrar a qualidade da entrega.
+            </p>
+            <ul class="projects-section__spotlight-list">
+              <li>Projeto publicado e navegável</li>
+              <li>Contexto de nicho, formato e foco comercial</li>
+              <li>Seção preparada para crescer com novos cases</li>
+            </ul>
+          </aside>
+        </div>
+        <div class="projects-section__stats" aria-label="Indicadores do portfólio">
+          <article class="projects-section__stat">
+            <strong data-project-count>1</strong>
+            <span>case publicado</span>
+          </article>
+          <article class="projects-section__stat">
+            <strong>100%</strong>
+            <span>projeto real no ar</span>
+          </article>
+          <article class="projects-section__stat">
+            <strong>UX</strong>
+            <span>estrutura com foco em conversão</span>
+          </article>
+        </div>
         <section class="projects" id="projects" aria-label="Lista de projetos"></section>
       </section>
 
@@ -705,10 +736,19 @@
       <article class="card">
         <a class="card__link" target="_blank" rel="noopener noreferrer">
           <div class="card__preview-wrap">
+            <div class="card__badges" aria-hidden="true">
+              <span class="card__badge card__badge--status card__status"></span>
+              <span class="card__badge card__type"></span>
+            </div>
             <img class="card__preview" alt="" loading="lazy" decoding="async" width="1280" height="720" />
           </div>
           <div class="card__content">
             <h2 class="card__title"></h2>
+            <div class="card__facts" aria-label="Contexto do projeto">
+              <span class="card__fact card__niche"></span>
+              <span class="card__fact card__format"></span>
+              <span class="card__fact card__focus"></span>
+            </div>
             <p class="card__description"></p>
             <ul class="card__case-list" aria-label="Resumo do estudo de caso">
               <li><strong>Objetivo:</strong> <span class="card__goal"></span></li>
