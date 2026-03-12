@@ -127,6 +127,74 @@ body::after {
   contain-intrinsic-size: 1px 900px;
 }
 
+#sobre,
+#about,
+#processo,
+#process,
+#projects,
+#planos,
+#plans,
+#faq,
+#contato,
+#contact {
+  scroll-margin-top: 104px;
+}
+
+.service-scope,
+.outcomes,
+.projects-section,
+.plans,
+.testimonials,
+.faq,
+.lead-form,
+.contact {
+  position: relative;
+  isolation: isolate;
+}
+
+.service-scope::after,
+.outcomes::after,
+.projects-section::after,
+.plans::after,
+.testimonials::after,
+.faq::after,
+.lead-form::after,
+.contact::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(111, 240, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 0% 100%, rgba(143, 123, 255, 0.12), transparent 30%);
+  opacity: 0.9;
+}
+
+@keyframes sectionTargetPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(111, 240, 255, 0);
+  }
+  25% {
+    box-shadow: 0 0 0 1px rgba(111, 240, 255, 0.28), 0 0 36px rgba(111, 240, 255, 0.12);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(111, 240, 255, 0);
+  }
+}
+
+#sobre:target,
+#about:target,
+#processo:target,
+#process:target,
+#planos:target,
+#plans:target,
+#faq:target,
+#contato:target,
+#contact:target {
+  animation: sectionTargetPulse 1.2s ease-out;
+}
+
 .bg-shape--one {
   width: 330px;
   height: 330px;
@@ -279,6 +347,8 @@ body::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
   padding: 11px 16px;
   border-radius: 10px;
   border: 1px solid rgba(111, 240, 255, 0.35);
@@ -289,11 +359,26 @@ body::after {
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
+.action-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.22) 48%, transparent 76%);
+  transform: translateX(-130%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
 .action-btn:hover,
 .action-btn:focus-visible {
   transform: translateY(-2px);
   border-color: rgba(111, 240, 255, 0.8);
   box-shadow: 0 0 0 1px rgba(111, 240, 255, 0.2), 0 12px 24px rgba(2, 9, 32, 0.5);
+}
+
+.action-btn:hover::before,
+.action-btn:focus-visible::before {
+  transform: translateX(130%);
 }
 
 .action-btn--primary {
@@ -1062,6 +1147,7 @@ body::after {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(4, 9, 28, 0.65);
   padding: 8px;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
 }
 
 .card__preview {
@@ -1120,6 +1206,7 @@ body::after {
   font-weight: 700;
   color: var(--project-accent);
   background: rgba(10, 31, 68, 0.45);
+  transition: transform 0.24s ease, border-color 0.24s ease, background-color 0.24s ease, box-shadow 0.24s ease;
 }
 
 .card:hover,
@@ -1129,9 +1216,24 @@ body::after {
   box-shadow: 0 34px 56px rgba(5, 9, 28, 0.65), 0 0 0 1px rgba(111, 240, 255, 0.14);
 }
 
+.card:hover .card__preview-wrap,
+.card:focus-within .card__preview-wrap {
+  border-color: rgba(111, 240, 255, 0.34);
+  box-shadow: 0 16px 28px rgba(4, 10, 30, 0.26);
+  transform: translateY(-1px);
+}
+
 .card:hover .card__preview,
 .card:focus-within .card__preview {
   transform: scale(1.015);
+}
+
+.card:hover .card__cta,
+.card:focus-within .card__cta {
+  transform: translateY(-1px);
+  border-color: rgba(111, 240, 255, 0.72);
+  background: rgba(13, 37, 82, 0.68);
+  box-shadow: 0 12px 22px rgba(4, 10, 30, 0.24);
 }
 
 .footer {
