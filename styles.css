@@ -1098,6 +1098,44 @@ body::after {
   justify-self: end;
 }
 
+.plans__service-pricing {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.plans__service-item {
+  grid-column: span 4;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(111, 240, 255, 0.24);
+  background:
+    linear-gradient(150deg, rgba(111, 240, 255, 0.08), transparent 48%),
+    rgba(7, 16, 40, 0.72);
+}
+
+.plans__service-label {
+  margin: 0;
+  color: #d6e3fb;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.plans__service-value {
+  margin: 6px 0 0;
+  color: #f0f6ff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.plans__service-value span {
+  color: #6ff0ff;
+}
+
 .plans__grid,
 .testimonials__grid {
   margin-top: 14px;
@@ -1802,6 +1840,10 @@ body::after {
     grid-column: auto;
   }
 
+  .plans__service-item {
+    grid-column: span 6;
+  }
+
   .pain,
   .about,
   .process,
@@ -1942,7 +1984,8 @@ body::after {
 
   .projects-section__header,
   .projects-section__stats,
-  .plans__header {
+  .plans__header,
+  .plans__service-pricing {
     grid-template-columns: 1fr;
   }
 
