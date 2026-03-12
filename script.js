@@ -187,7 +187,7 @@ function pickCopy(copy) {
   return isEnglish ? copy.en : copy.pt;
 }
 
-// Mostrar/esconder botao voltar ao topo
+// Mostrar/esconder botão voltar ao topo
 const backToTop = document.querySelector(".back-to-top");
 
 if (backToTop) {
@@ -225,11 +225,11 @@ const projects = [
         en: "Landing page"
       },
       niche: {
-        pt: "Nicho: estetica e beleza",
+        pt: "Nicho: estética e beleza",
         en: "Niche: beauty"
       },
       format: {
-        pt: "Formato: pagina unica",
+        pt: "Formato: página única",
         en: "Format: single page"
       },
       focus: {
@@ -352,7 +352,7 @@ if (quoteForm) {
     const niche = quoteForm.niche.value.trim();
     const goal = quoteForm.goal.value.trim();
 
-    // Validacao basica
+    // Validação básica
     if (!name || !niche || !goal) {
       alert(isEnglish ? "Please fill in all fields" : "Por favor, preencha todos os campos");
       return;
@@ -372,7 +372,7 @@ if (quoteForm) {
     button.textContent = isEnglish ? "Sending..." : "Enviando...";
     button.disabled = true;
 
-    // Sanitizacao basica
+    // Sanitização básica
     const sanitizedName = name.replace(/[<>]/g, "");
     const sanitizedNiche = niche.replace(/[<>]/g, "");
     const sanitizedGoal = goal.replace(/[<>]/g, "");
@@ -447,7 +447,7 @@ if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   });
 }
 
-// Adicione lazy loading para imagens fora da viewport
+// Adiciona lazy loading para imagens fora da viewport
 if ('loading' in HTMLImageElement.prototype) {
   const images = document.querySelectorAll('img[loading="lazy"]');
   images.forEach(img => {
