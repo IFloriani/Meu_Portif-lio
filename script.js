@@ -144,7 +144,7 @@ const backToTop = document.querySelector(".back-to-top");
 if (backToTop) {
   window.addEventListener("scroll", () => {
     backToTop.hidden = window.scrollY <= 400;
-  });
+  }, { passive: true });
 
   backToTop.addEventListener("click", () => {
     window.scrollTo({
@@ -318,8 +318,24 @@ document.querySelectorAll("[data-track]").forEach((element) => {
 });
 
 const revealTargets = document.querySelectorAll(
-  ".about, .process, .offer, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .card"
+  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
 );
+
+function applyReveal(selector, stagger = 0, startDelay = 0) {
+  document.querySelectorAll(selector).forEach((element, index) => {
+    element.classList.add("reveal-on-scroll");
+
+    if (stagger > 0) {
+      element.style.setProperty("--reveal-delay", `${startDelay + index * stagger}ms`);
+    }
+  });
+}
+
+applyReveal(
+  ".pain, .about, .process, .service-scope, .why-me, .offer, .outcomes, .projects-section, .plans, .testimonials, .faq, .lead-form, .contact"
+);
+applyReveal(".pain__item, .about__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item", 70, 40);
+applyReveal(".highlight-card, .plan-card, .testimonial-card, .card", 90, 60);
 
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   revealTargets.forEach((element) => element.classList.add("is-visible"));

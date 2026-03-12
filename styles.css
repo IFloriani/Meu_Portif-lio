@@ -189,6 +189,14 @@ body::after {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.06em;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.language-switch__link:hover,
+.language-switch__link:focus-visible {
+  color: #ffffff;
+  background: rgba(111, 240, 255, 0.12);
+  transform: translateY(-1px);
 }
 
 .language-switch__link--active {
@@ -234,6 +242,37 @@ body::after {
   background: rgba(8, 20, 54, 0.85);
   color: #fff;
   font-size: 0.82rem;
+}
+
+.hero__quick-nav {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hero__quick-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 240, 255, 0.24);
+  background: rgba(8, 17, 44, 0.56);
+  color: #d7e4ff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.24s ease, border-color 0.24s ease, background-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.hero__quick-link:hover,
+.hero__quick-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(111, 240, 255, 0.68);
+  background: rgba(12, 28, 68, 0.78);
+  box-shadow: 0 10px 22px rgba(3, 9, 30, 0.34);
 }
 
 .action-btn {
@@ -366,6 +405,76 @@ body::after {
   background:
     linear-gradient(145deg, rgba(111, 240, 255, 0.08), transparent 40%),
     rgba(10, 18, 45, 0.66);
+}
+
+.about__item,
+.pain__item,
+.why-me__item,
+.service-scope__item,
+.outcomes__item,
+.process__item,
+.highlight-card,
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
+}
+
+.about__item::before,
+.pain__item::before,
+.why-me__item::before,
+.service-scope__item::before,
+.outcomes__item::before,
+.process__item::before,
+.highlight-card::before,
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 42%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.about__item:hover,
+.about__item:focus-within,
+.pain__item:hover,
+.pain__item:focus-within,
+.why-me__item:hover,
+.why-me__item:focus-within,
+.service-scope__item:hover,
+.service-scope__item:focus-within,
+.outcomes__item:hover,
+.outcomes__item:focus-within,
+.process__item:hover,
+.process__item:focus-within,
+.highlight-card:hover,
+.highlight-card:focus-within,
+.testimonial-card:hover,
+.testimonial-card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(111, 240, 255, 0.62);
+  box-shadow: 0 20px 36px rgba(4, 10, 30, 0.42);
+}
+
+.about__item:hover::before,
+.about__item:focus-within::before,
+.pain__item:hover::before,
+.pain__item:focus-within::before,
+.why-me__item:hover::before,
+.why-me__item:focus-within::before,
+.service-scope__item:hover::before,
+.service-scope__item:focus-within::before,
+.outcomes__item:hover::before,
+.outcomes__item:focus-within::before,
+.process__item:hover::before,
+.process__item:focus-within::before,
+.highlight-card:hover::before,
+.highlight-card:focus-within::before,
+.testimonial-card:hover::before,
+.testimonial-card:focus-within::before {
+  opacity: 1;
 }
 
 .about__item h3 {
@@ -935,29 +1044,7 @@ body::after {
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   color: #f3f7ff;
-  transform: translateY(18px);
-  opacity: 0;
-  animation: revealUp 0.65s ease-out forwards;
-}
-
-.card:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.card:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.card:nth-child(4) {
-  animation-delay: 0.3s;
-}
-
-.card:nth-child(5) {
-  animation-delay: 0.4s;
-}
-
-.card:nth-child(6) {
-  animation-delay: 0.5s;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
 .card__link {
@@ -1146,6 +1233,7 @@ body::after {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.65s ease, transform 0.65s ease;
+  transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
 
@@ -1311,6 +1399,11 @@ body::after {
   .trust-badges {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .hero__quick-nav {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .plans__grid,
