@@ -214,7 +214,7 @@ body::after {
 .hero {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 84px 20px 40px;
+  padding: 84px 20px 56px;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(111, 240, 255, 0.18);
@@ -512,7 +512,7 @@ body::after {
 .projects-section {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 10px 20px 74px;
+  padding: 30px 20px 86px;
 }
 
 .projects-section__tag {
@@ -618,7 +618,7 @@ body::after {
 .about {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 8px 20px 30px;
+  padding: 26px 20px 46px;
 }
 
 .about__tag {
@@ -783,7 +783,7 @@ body::after {
 .pain {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 8px 20px 36px;
+  padding: 24px 20px 52px;
 }
 
 .pain__tag {
@@ -850,7 +850,7 @@ body::after {
 .why-me {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 8px 20px 36px;
+  padding: 24px 20px 52px;
 }
 
 .why-me__tag {
@@ -914,7 +914,7 @@ body::after {
 .outcomes {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 8px 20px 34px;
+  padding: 24px 20px 50px;
 }
 
 .service-scope__grid,
@@ -959,7 +959,7 @@ body::after {
 .process {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 16px 20px 40px;
+  padding: 28px 20px 56px;
 }
 
 .offer,
@@ -969,11 +969,11 @@ body::after {
 .lead-form {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 16px 20px 40px;
+  padding: 28px 20px 56px;
 }
 
 .offer {
-  margin-bottom: 8px;
+  margin: 10px auto 22px;
   padding: 26px 24px;
   border-radius: 18px;
   border: 1px solid rgba(111, 240, 255, 0.33);
@@ -1291,7 +1291,7 @@ body::after {
 
 .contact {
   max-width: 1120px;
-  margin: 0 auto 70px;
+  margin: 18px auto 84px;
   padding: 28px 24px;
   border-radius: 20px;
   border: 1px solid rgba(111, 240, 255, 0.32);
@@ -1643,8 +1643,27 @@ body::after {
   }
 
   .hero {
-    padding: 72px 20px 34px;
+    padding: 72px 20px 46px;
     border-radius: 24px;
+  }
+
+  .pain,
+  .about,
+  .process,
+  .service-scope,
+  .why-me,
+  .outcomes,
+  .projects-section,
+  .plans,
+  .testimonials,
+  .faq,
+  .lead-form {
+    padding-top: 22px;
+    padding-bottom: 44px;
+  }
+
+  .offer {
+    margin-bottom: 18px;
   }
 
   .hero__insight {
@@ -1724,7 +1743,29 @@ body::after {
 
   .hero {
     padding-top: 60px;
+    padding-bottom: 38px;
     border-radius: 20px;
+  }
+
+  .pain,
+  .about,
+  .process,
+  .service-scope,
+  .why-me,
+  .outcomes,
+  .projects-section,
+  .plans,
+  .testimonials,
+  .faq,
+  .lead-form {
+    padding-top: 18px;
+    padding-bottom: 34px;
+  }
+
+  .offer,
+  .contact {
+    margin-top: 10px;
+    margin-bottom: 16px;
   }
 
   .hero h1 {
