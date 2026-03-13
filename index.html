@@ -669,7 +669,7 @@
       <section class="lead-form" aria-label="Formulário de orçamento" lang="pt-BR">
         <p class="lead-form__tag">Fale comigo</p>
         <h2>Prefere enviar os dados primeiro? Preencha e abra no WhatsApp.</h2>
-        <form id="quote-form">
+        <form id="quote-form" novalidate>
           <label for="name">Nome</label>
           <input id="name" name="name" type="text" placeholder="Seu nome" required />
 
@@ -686,6 +686,7 @@
           ></textarea>
 
           <button class="action-btn action-btn--primary" type="submit">Enviar para WhatsApp</button>
+          <p class="lead-form__feedback" id="quote-form-feedback" role="alert" aria-live="polite"></p>
         </form>
       </section>
 

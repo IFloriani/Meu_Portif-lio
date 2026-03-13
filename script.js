@@ -345,6 +345,38 @@ projects.forEach((project) => {
 const quoteForm = document.getElementById("quote-form");
 
 if (quoteForm) {
+  const feedbackNode = document.getElementById("quote-form-feedback");
+  const formFields = [quoteForm.name, quoteForm.niche, quoteForm.goal];
+
+  const setFeedback = (message = "") => {
+    if (!feedbackNode) return;
+
+    feedbackNode.textContent = message;
+    feedbackNode.classList.toggle("is-visible", Boolean(message));
+  };
+
+  const markInvalid = (field) => {
+    field.classList.add("is-invalid");
+    field.setAttribute("aria-invalid", "true");
+  };
+
+  const clearInvalid = (field) => {
+    field.classList.remove("is-invalid");
+    field.removeAttribute("aria-invalid");
+  };
+
+  formFields.forEach((field) => {
+    field.addEventListener("input", () => {
+      if (field.value.trim()) {
+        clearInvalid(field);
+      }
+
+      if (formFields.every((input) => input.value.trim().length > 0)) {
+        setFeedback("");
+      }
+    });
+  });
+
   quoteForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -352,18 +384,35 @@ if (quoteForm) {
     const niche = quoteForm.niche.value.trim();
     const goal = quoteForm.goal.value.trim();
 
+    formFields.forEach(clearInvalid);
+    setFeedback("");
+
     // Validação básica
     if (!name || !niche || !goal) {
-      alert(isEnglish ? "Please fill in all fields" : "Por favor, preencha todos os campos");
+      const firstEmptyField = formFields.find((field) => !field.value.trim());
+      formFields.filter((field) => !field.value.trim()).forEach(markInvalid);
+
+      setFeedback(
+        isEnglish
+          ? "Please fill in all required fields before sending."
+          : "Preencha todos os campos obrigatórios antes de enviar."
+      );
+
+      if (firstEmptyField) {
+        firstEmptyField.focus();
+      }
+
       return;
     }
 
     if (name.length < 2) {
-      alert(
+      markInvalid(quoteForm.name);
+      setFeedback(
         isEnglish
           ? "Name must contain at least 2 characters"
           : "Nome deve ter pelo menos 2 caracteres"
       );
+      quoteForm.name.focus();
       return;
     }
 

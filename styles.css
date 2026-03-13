@@ -1432,6 +1432,30 @@ body::after {
   border-color: rgba(111, 240, 255, 0.9);
 }
 
+.lead-form input.is-invalid,
+.lead-form textarea.is-invalid {
+  border-color: rgba(255, 122, 122, 0.86);
+  box-shadow: 0 0 0 1px rgba(255, 122, 122, 0.28), 0 10px 18px rgba(45, 10, 16, 0.32);
+}
+
+.lead-form__feedback {
+  display: none;
+  margin: 2px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 122, 122, 0.52);
+  background:
+    linear-gradient(140deg, rgba(255, 122, 122, 0.14), transparent 48%),
+    rgba(38, 12, 20, 0.72);
+  color: #ffd7df;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.lead-form__feedback.is-visible {
+  display: block;
+}
+
 .process__tag {
   margin: 0;
   color: var(--accent);

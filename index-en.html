@@ -657,7 +657,7 @@
       <section class="lead-form" aria-label="Quote form">
         <p class="lead-form__tag">Contact me</p>
         <h2>Prefer to send details first? Fill the form and open WhatsApp.</h2>
-        <form id="quote-form">
+        <form id="quote-form" novalidate>
           <label for="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Your name" required />
 
@@ -674,6 +674,7 @@
           ></textarea>
 
           <button class="action-btn action-btn--primary" type="submit">Send to WhatsApp</button>
+          <p class="lead-form__feedback" id="quote-form-feedback" role="alert" aria-live="polite"></p>
         </form>
       </section>
 
