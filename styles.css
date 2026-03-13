@@ -1169,6 +1169,13 @@ body::after {
   font-size: 1rem;
 }
 
+.plan-card__fit {
+  margin: 3px 0 0;
+  color: #d1ddf4;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 .plan-card__price {
   margin: 8px 0 0;
   font-weight: 800;
