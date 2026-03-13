@@ -453,8 +453,181 @@ document.querySelectorAll("[data-track]").forEach((element) => {
   });
 });
 
+const reflexGame = document.querySelector("[data-reflex-game]");
+
+if (reflexGame) {
+  const startButton = reflexGame.querySelector("[data-reflex-start]");
+  const arena = reflexGame.querySelector("[data-reflex-arena]");
+  const target = reflexGame.querySelector("[data-reflex-target]");
+  const scoreNode = reflexGame.querySelector("[data-reflex-score]");
+  const bestNode = reflexGame.querySelector("[data-reflex-best]");
+  const timeNode = reflexGame.querySelector("[data-reflex-time]");
+  const feedbackNode = reflexGame.querySelector("[data-reflex-feedback]");
+  const bestStorageKey = "reflex_best_score_v1";
+
+  const totalSeconds = 15;
+  let score = 0;
+  let timeLeft = totalSeconds;
+  let bestScore = 0;
+  let tickInterval = null;
+  let spawnTimeout = null;
+  let running = false;
+
+  const labels = {
+    start: isEnglish ? "Start challenge" : "Iniciar desafio",
+    restart: isEnglish ? "Play again" : "Jogar de novo",
+    ready: isEnglish ? "Ready to test your reflexes?" : "Pronto para testar seus reflexos?",
+    inProgress: isEnglish ? "Go! Hit the target before it disappears." : "Valendo! Acerte o alvo antes de ele sumir.",
+    result: (value) => {
+      if (isEnglish) {
+        if (value >= 18) return `Final score: ${value}. Elite reflexes.`;
+        if (value >= 12) return `Final score: ${value}. Great reaction speed.`;
+        return `Final score: ${value}. Good run. Try again to beat it.`;
+      }
+
+      if (value >= 18) return `Pontuação final: ${value}. Reflexos de elite.`;
+      if (value >= 12) return `Pontuação final: ${value}. Ótima velocidade de reação.`;
+      return `Pontuação final: ${value}. Boa rodada. Tente novamente para superar.`;
+    }
+  };
+
+  const clearTimers = () => {
+    if (tickInterval) {
+      window.clearInterval(tickInterval);
+      tickInterval = null;
+    }
+
+    if (spawnTimeout) {
+      window.clearTimeout(spawnTimeout);
+      spawnTimeout = null;
+    }
+  };
+
+  const updateHud = () => {
+    scoreNode.textContent = String(score);
+    timeNode.textContent = `${timeLeft.toFixed(1)}s`;
+
+    if (bestNode) {
+      bestNode.textContent = String(bestScore);
+    }
+  };
+
+  const loadBestScore = () => {
+    try {
+      const stored = Number(localStorage.getItem(bestStorageKey));
+      if (Number.isFinite(stored) && stored >= 0) {
+        bestScore = stored;
+      }
+    } catch (error) {
+      // Keep gameplay working even when storage is blocked.
+    }
+  };
+
+  const persistBestScore = () => {
+    try {
+      localStorage.setItem(bestStorageKey, String(bestScore));
+    } catch (error) {
+      // Ignore storage errors.
+    }
+  };
+
+  const placeTarget = () => {
+    if (!running) return;
+
+    const areaRect = arena.getBoundingClientRect();
+    const size = 48;
+    const minX = size / 2;
+    const maxX = areaRect.width - size / 2;
+    const minY = size / 2;
+    const maxY = areaRect.height - size / 2;
+
+    const x = minX + Math.random() * Math.max(1, maxX - minX);
+    const y = minY + Math.random() * Math.max(1, maxY - minY);
+
+    target.style.left = `${x}px`;
+    target.style.top = `${y}px`;
+    target.hidden = false;
+
+    spawnTimeout = window.setTimeout(() => {
+      target.hidden = true;
+      placeTarget();
+    }, 760);
+  };
+
+  const endGame = () => {
+    running = false;
+    clearTimers();
+    target.hidden = true;
+    startButton.disabled = false;
+    startButton.textContent = labels.restart;
+
+    const isNewBest = score > bestScore;
+    if (isNewBest) {
+      bestScore = score;
+      persistBestScore();
+      feedbackNode.textContent = isEnglish
+        ? `Final score: ${score}. New best score!`
+        : `Pontuação final: ${score}. Novo recorde!`;
+    } else {
+      feedbackNode.textContent = labels.result(score);
+    }
+
+    updateHud();
+
+    trackEvent("reflex_game_complete", {
+      score
+    });
+  };
+
+  const startGame = () => {
+    running = true;
+    score = 0;
+    timeLeft = totalSeconds;
+    startButton.disabled = true;
+    startButton.textContent = labels.inProgress;
+    feedbackNode.textContent = labels.inProgress;
+    updateHud();
+    placeTarget();
+
+    tickInterval = window.setInterval(() => {
+      timeLeft = Math.max(0, timeLeft - 0.1);
+      updateHud();
+
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 100);
+  };
+
+  target.addEventListener("click", () => {
+    if (!running) return;
+
+    score += 1;
+    updateHud();
+    target.hidden = true;
+
+    if (spawnTimeout) {
+      window.clearTimeout(spawnTimeout);
+      spawnTimeout = null;
+    }
+
+    placeTarget();
+  });
+
+  startButton.addEventListener("click", () => {
+    if (running) return;
+    clearTimers();
+    startGame();
+  });
+
+  feedbackNode.textContent = labels.ready;
+  startButton.textContent = labels.start;
+  loadBestScore();
+  updateHud();
+}
+
 const revealTargets = document.querySelectorAll(
-  ".projects-section__spotlight, .projects-section__stat, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
+  ".reflex-lab__panel, .projects-section__spotlight, .projects-section__stat, .plan-card, .testimonial-card, .highlight-card, .about__item, .pain__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item, .card"
 );
 
 function applyReveal(selector, stagger = 0, startDelay = 0) {
@@ -468,6 +641,7 @@ function applyReveal(selector, stagger = 0, startDelay = 0) {
 }
 
 applyReveal(".projects-section__spotlight, .projects-section__stat", 80, 40);
+applyReveal(".reflex-lab__panel", 60, 30);
 applyReveal(".pain__item, .about__item, .process__item, .service-scope__item, .why-me__item, .outcomes__item", 70, 40);
 applyReveal(".highlight-card, .plan-card, .testimonial-card, .card", 90, 60);
 
